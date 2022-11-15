@@ -1,0 +1,314 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "poppins", sans-serif;
+	box-sizing: border-box;
+}
+/*Pra quê essas class de teste, Rafael?*/
+.teste1{
+    width: 100%;
+    height: 200px;
+    background: rgb(59, 7, 32);
+    border-top: 50%;
+}
+.teste2{
+    width: 100%;
+    height: 300px;
+    background: rgb(214, 25, 25);
+}
+
+/*animação da frase sendo escrita*/
+#anm::after{
+    content:'|';
+    margin-left:5px;
+    opacity:1;
+    animation: pisca-pisca .7s infinite;
+}
+@Keyframes pisca-pisca{
+    0%,100%{
+     opacity:1;
+    }
+    50%{
+      opacity:0;
+    }
+}
+
+.header{
+	height: 100vh;
+	width: 100%;
+	padding: 0 8%;
+	background: #080008;
+	position: relative;
+}
+nav{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.logo{
+    width: 200px;
+    z-index: 3;
+}
+/*
+.nav-links{
+    padding: 28px 0;
+}
+.nav-links li{
+    display: inline-block;
+    margin: 0 15px;
+}
+.nav-links li a{
+    text-decoration: none;
+    color: rgb(192, 192, 192);
+    padding: 5px 0;
+    position: relative;
+}
+.nav-links li a::after{
+    content: '';
+    background: linear-gradient(45deg, #1768a9, #4361d6e7);
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: 15s;
+}
+.nav-links li a:hover::after{
+    width: 100%;
+}*/
+.btn{
+    background: linear-gradient(45deg, #1768a9, #4361d6e7);
+    color: #fff;
+    padding: 100px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 50;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    text-align: center;
+}
+.content{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 90%;
+    max-width: 900px;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    color: rgb(219, 219, 219);
+}
+.content h1{
+    font-size: 50px;
+    font-weight: 400;
+    margin-bottom: 50px;
+}
+.click1{
+    display: inline-block;
+	background: linear-gradient(45deg, #1768a9, #4361d6e7);
+	padding: 10px 30px;
+    border-radius: 3px;
+    cursor: pointer;
+	text-decoration: none;
+	color: #fff;
+	box-shadow: 3px 8px 22px rgba(94,28,68,0.15);
+    margin-top: 30px;
+}
+.click2{
+    margin-top: 30px;
+    margin-left: 50px;
+    display: inline-block;
+	background: linear-gradient(45deg, #1768a9, #4361d6e7);
+	padding: 10px 30px;
+    border-radius: 3px;
+    cursor: pointer;
+	text-decoration: none;
+	color: #fff;
+	box-shadow: 3px 8px 22px rgba(94,28,68,0.15);
+}
+.back-video{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+}
+@media(min-aspect-ratio: 16/9){
+    .back-video{
+        width: 100%;
+        height: auto;
+    }
+}
+@media(max-aspect-ratio: 16/9){
+    .back-video{
+        width: auto;
+        height: 100%;
+    }
+}
+
+
+
+
+
+
+
+main{
+    margin-left: 100px;
+    display: flex;
+    align-items: center;
+}
+
+main .main__text h1{
+    width: 50%;
+}
+
+main .main__text h1 strong{
+    display: block;
+    font-weight: normal;
+}
+
+main .main__text h1 b{
+    background-color: rgb(255, 255, 255);
+    color: white;
+    padding: 0 5px;
+    font-size: 5rem;
+}
+
+main .main__text p{
+    color: #8B7F8D;
+    margin: 20px 0 40px;
+    width: 90%;
+}
+
+main .main__text button{
+    background-color: #8d60f1;
+    color: white;
+    border-radius: 30px;
+    padding: 10px 50px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: 17px;
+    border: 1px solid transparent;
+    transition: all 0.5s;
+}
+
+main .main__text button:hover{
+    transform: scale(0.9);
+}
+
+main .main__img{
+    width: 80%;
+    
+}
+
+main .main__img img{
+    width: 100%;
+    margin-right: -70px;
+    margin-top: 300px;
+}
+
+.improviso{
+    margin-top: -150px;
+}
+
+
+/*css do menu*/
+ul{
+    margin-top: 30px;
+    min-height: 10vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+ul li{
+    list-style: none;
+}
+ul li a{
+    position: relative;
+    color: rgb(255, 255, 255);
+    font-size: 1em;
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 20px;
+    font-weight: 300;
+    background: rgba(255,255,255,0,05);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    z-index: 1000;
+    overflow: hidden;
+    backdrop-filter: blur(15px);
+}
+ul li a:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: rgba(255,255,255,0.1);
+}
+ul li:first-child a{
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+ul li:nth-last-child(2) a{
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+#maker{
+    position: absolute;
+    top: 21px; /*encaixe na altura do botao*/
+    width: 41px;
+    z-index: 1;
+    transition: 0.5s;
+}
+#maker::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%; /*encaixe no botao*/
+    transform: translate(-50%,-50%);
+    width: 50px; /*largura para encaixe no botao*/
+    height: 50px;
+    border-radius: 50%;
+    transition: 0.5s;
+    background: #102877;
+    box-shadow: 0 0 15px #102877, 0 0 30px #102877, 0 0 45px #102877, 
+    0 0 60px #102877;
+}
+
+ul li:nth-child(1):hover ~ #maker::before{
+    background: #1d19eb;
+    box-shadow: 0 0 15px #1d19eb, 0 0 30px #1d19eb, 0 0 45px #1d19eb, 
+    0 0 60px #1d19eb;
+}
+
+ul li:nth-child(2):hover ~ #maker::before{
+    background: #1d19eb;
+    box-shadow: 0 0 15px #1d19eb, 0 0 30px #1d19eb, 0 0 45px #1d19eb, 
+    0 0 60px #1d19eb;
+}
+
+ul li:nth-child(3):hover ~ #maker::before{
+    background: #1d19eb;
+    box-shadow: 0 0 15px #1d19eb, 0 0 30px #1d19eb, 0 0 45px #1d19eb, 
+    0 0 60px #1d19eb;
+}
+
+ul li:nth-child(4):hover ~ #maker::before{
+    background: #1d19eb;
+    box-shadow: 0 0 15px #1d19eb, 0 0 30px #1d19eb, 0 0 45px #1d19eb, 
+    0 0 60px #1d19eb;
+}
+
+ul li:nth-child(5):hover ~ #maker::before{
+    background: #1d19eb;
+    box-shadow: 0 0 15px #1d19eb, 0 0 30px #1d19eb, 0 0 45px #1d19eb, 
+    0 0 80px#1d19eb;
+}
