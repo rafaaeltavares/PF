@@ -1,7 +1,6 @@
 <?php 
 session_start();
 include('conexao.php');
-
 if(empty($_POST['Matricula']) || empty($_POST['Senha'])){
     header('location: pglogin.php');
     exit();
@@ -17,6 +16,7 @@ $row = mysqli_num_rows($result);
 
 if($row == 1){
     $nome_aluno =  mysqli_fetch_assoc($result);
+
     $_SESSION['nome'] = $nome_aluno['nome'];
     header('location: painel.php');
     exit();
@@ -26,5 +26,9 @@ if($row == 1){
     exit;
 
 }
+
+?>
+<?php
+$_SESSION["visitante"] = " ";
 
 ?>
