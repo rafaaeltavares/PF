@@ -9,7 +9,11 @@ if(empty($_POST['Matricula']) || empty($_POST['Senha'])){
 $Matricula = mysqli_real_escape_string($conexao, $_POST['Matricula']);
 $senha = mysqli_real_escape_string($conexao,$_POST['Senha']);
 
-$query = "SELECT usuario_id, nome FROM usuario where Matricula = '{$Matricula}' and Senha = md5('{$senha}')";
+$query = "SELECT Usrid, UsrNome, FROM cadusuario where UsrMatricula = '{$Matricula}' and UsrSenha = md5('{$senha}')";
+
+
+
+
 $result = mysqli_query($conexao, $query);
 
 $row = mysqli_num_rows($result);
@@ -26,9 +30,5 @@ if($row == 1){
     exit;
 
 }
-
-?>
-<?php
-$_SESSION["visitante"] = " ";
 
 ?>

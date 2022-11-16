@@ -18,7 +18,7 @@ if($row['total'] == 1){
     exit;
 }
 
-$sql = "INSERT INTO usuario (usuario,senha,Matricula,nome) values('$usuario','$senha','$matricula','$nome')";
+$sql = "INSERT INTO cadusuario (UsrNome,UsrSenha,UsrLogin,UsrMatricula) values('$nome','$senha','$usuario','$matricula')";
 
 if($conexao->query($sql) === TRUE){
     $_SESSION['statusCadastro'] = true;
