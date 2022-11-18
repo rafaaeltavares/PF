@@ -27,7 +27,7 @@ session_start();
                 if(isset($_SESSION['userExiste'])):
             ?>
             <div class = 'cadastro-correto'>
-                <p>USUARIO JA CADASTRADO AMIGO TENTE NOVAMENTE</p>
+                <p>USUARIO OU MATRICOLA JA CADASTRADA TENTE NOVAMENTE</p>
             </div>
             <!-- endif pra englobar todo o codigo acima. unset pra não mostrar essa sessão(status cadastro) para quem acessar pela primeira vez -->
             <?php

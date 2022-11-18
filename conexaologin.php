@@ -9,18 +9,11 @@ if(empty($_POST['Matricula']) || empty($_POST['Senha'])){
 $Matricula = mysqli_real_escape_string($conexao, $_POST['Matricula']);
 $senha = mysqli_real_escape_string($conexao,$_POST['Senha']);
 
-$query = "SELECT Usrid, UsrNome, FROM cadusuario where UsrMatricula = '{$Matricula}' and UsrSenha = md5('{$senha}')";
-
-
-
-
-$result = mysqli_query($conexao, $query);
-
+$query = "SELECT UsrNome from cadusuario where UsrMatricula = '{$Matricula}' and UsrSenha =('{$senha}')";
+$result = mysqli_query($conexao,$query);
 $row = mysqli_num_rows($result);
-
 if($row == 1){
     $nome_aluno =  mysqli_fetch_assoc($result);
-
     $_SESSION['nome'] = $nome_aluno['nome'];
     header('location: painel.php');
     exit();

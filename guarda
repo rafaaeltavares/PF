@@ -1,0 +1,4 @@
+$acesso = "SELECT UsrId from cadusuario where UsrMatricula = ('{$matricula}')";
+$queryAcesso = mysqli_query($conexao,$acesso);
+$nivelAcesso = "INSERT into cadusuarioacesso (UsrId, NivId) values ($queryAcesso,2)";
+$queryNivel = mysqli_query($conexao,$nivelAcesso);
