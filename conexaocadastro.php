@@ -12,7 +12,7 @@ function verificar($usuario,$matricula,$conexao){
     $sql = "select count(*) as total from cadusuario where UsrLogin = '$usuario' or UsrMatricula = '$matricula'";
     $result = mysqli_query($conexao,$sql);
     $row = mysqli_fetch_assoc($result);
-    if($row['total'] == 1){
+    if($row['total'] === 1){
         $_SESSION['userExiste'] = true;
         header('location:pgcadastro.php');
         exit;
@@ -22,22 +22,33 @@ function verificar($usuario,$matricula,$conexao){
 }
 function cadastrar($nome,$senha,$usuario,$matricula,$conexao){
     if(verificar($usuario,$matricula,$conexao) == "FALSO"){
-        $sql = "INSERT INTO cadusuario (UsrNome,UsrSenha,UsrLogin,UsrMatricula) values('$nome',md5('$senha'),'$usuario','$matricula')";
-        if($conexao->query($sql) === TRUE){
+        $sql = "INSERT INTO cadusuario (UsrNome,UsrSenha,UsrLogin,UsrMatricula) values('$nome','$senha','$usuario','$matricula')";
+        if($conexao->query($sql) == TRUE){
+        // if(nivelAcesso($nome,$senha,$usuario,$matricula,$conexao)==="TRUE"){
             $_SESSION['statusCadastro'] = true;
-        }
-        $conexao -> close();
-        $_SESSION['nome'] = $nome;
-        header('location: painel.php');
-        exit;
-    }else{
-        return "erro";
+            $conexao -> close();
+            $_SESSION['nome'] = $nome;
+            header('location: painel.php');
+            exit;
+            // }else {
+            //     return "nao deu certo";
+            // }
+        }  
     }
    
 }
-function nivelAcesso($nome,$senha,$usuario,$matricula,$conexao,){
-
-}
+// function nivelAcesso($nome,$senha,$usuario,$matricula,$conexao){
+//     $sql = "SELECT Usrid from cadusuario where UsrMatricula = ('{$matricula}')";
+//     $usrId = mysqli_query($conexao,$sql);
+//     $bate = mysqli_fetch_assoc($usrId);
+//     $sqlinsert = "INSERT into cadusuarioacesso values ('{$bate['Userid']}',2)";
+//     if($conexao->query($sqlquery) === TRUE){
+//         return "TRUE";
+//     }else{
+//         return "False";
+//     }
+    
+// }
 cadastrar($nome,$senha,$usuario,$matricula,$conexao);
 
  

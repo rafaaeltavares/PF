@@ -43,8 +43,8 @@ session_start();
 
                 <div class="inputBox">
                     <!--<input type="text" required="required">-->
-                    <input name="Matricula" type="text" required="required">
-                    <span>Matrícula</span>
+                    <input name="Usuario" type="text" required="required">
+                    <span>Usuário</span>
                     <i></i>
                 </div>
                 <div class="inputBox">
