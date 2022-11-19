@@ -1,7 +1,7 @@
 
 var div = document.getElementById('anm');
 //textos que vao aparecer no titulo
-var textos = ['conhecimento','amizades.','informação.', 'um futuro.'];
+var textos = ['conhecimento.','amizades.','informação.', 'um futuro.'];
 
 function escrever(palavra, done) {
     var char = palavra.split('').reverse();

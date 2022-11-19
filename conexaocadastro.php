@@ -8,6 +8,16 @@ $usuario = mysqli_real_escape_string($conexao,trim($_POST['usuario']));
 $senha = mysqli_real_escape_string($conexao,trim(md5($_POST['senha'])));
 $nome = mysqli_real_escape_string($conexao,trim($_POST['nome']));
 
+if(empty($_POST['usuario']) || empty($_POST['senha']) || empty($_POST['nome']) || empty($_POST['matricula'])){
+    header('location: pglogin.php');
+    exit();
+}else{
+    cadastrar($nome,$senha,$usuario,$matricula,$conexao);
+}
+
+
+
+
 function verificar($usuario,$matricula,$conexao){
     $sql = "select count(*) as total from cadusuario where UsrLogin = '$usuario' or UsrMatricula = '$matricula'";
     $result = mysqli_query($conexao,$sql);
@@ -24,32 +34,31 @@ function cadastrar($nome,$senha,$usuario,$matricula,$conexao){
     if(verificar($usuario,$matricula,$conexao) == "FALSO"){
         $sql = "INSERT INTO cadusuario (UsrNome,UsrSenha,UsrLogin,UsrMatricula) values('$nome','$senha','$usuario','$matricula')";
         if($conexao->query($sql) == TRUE){
-        // if(nivelAcesso($nome,$senha,$usuario,$matricula,$conexao)==="TRUE"){
+        if(nivelAcesso($nome,$senha,$usuario,$matricula,$conexao)==="TRUE"){
             $_SESSION['statusCadastro'] = true;
             $conexao -> close();
             $_SESSION['nome'] = $nome;
             header('location: painel.php');
             exit;
-            // }else {
-            //     return "nao deu certo";
-            // }
+            }else {
+                return "nao deu certo";
+            }
         }  
     }
    
 }
-// function nivelAcesso($nome,$senha,$usuario,$matricula,$conexao){
-//     $sql = "SELECT Usrid from cadusuario where UsrMatricula = ('{$matricula}')";
-//     $usrId = mysqli_query($conexao,$sql);
-//     $bate = mysqli_fetch_assoc($usrId);
-//     $sqlinsert = "INSERT into cadusuarioacesso values ('{$bate['Userid']}',2)";
-//     if($conexao->query($sqlquery) === TRUE){
-//         return "TRUE";
-//     }else{
-//         return "False";
-//     }
-    
-// }
-cadastrar($nome,$senha,$usuario,$matricula,$conexao);
+function nivelAcesso($nome,$senha,$usuario,$matricula,$conexao){
+    $sql = "SELECT Usrid from cadusuario where UsrMatricula = ('{$matricula}')";
+    $usrId = mysqli_query($conexao,$sql);
+    $bate = mysqli_fetch_assoc($usrId);
+    $sqlinsert = "INSERT into cadusuarioacesso values ('{$bate['Usrid']}',5)";
+    if($conexao->query($sqlinsert) === TRUE){
+        return "TRUE";
+    }else{
+        return "False";
+    }
+}
+
 
  
 

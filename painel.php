@@ -87,7 +87,7 @@ session_start();
       </div>
       <div class="name-job">
         <div class="profile_name"><?php echo $_SESSION["nome"];?></div>
-        <div class="job">Aluno</div>
+        <div class="job"><?php echo $_SESSION["cargo"];?></div>
       </div>
       <a href="logout.php"><i class='bx bx-log-out'></i></a>
     </div>
