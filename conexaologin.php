@@ -20,10 +20,11 @@ function logar($usuario,$senha,$conexao){
     $row = mysqli_num_rows($result);
     if($row == 1){
         $nome_aluno =  mysqli_fetch_assoc($result);
-        $_SESSION['nome'] = $nome_aluno['UsrNome'];
         ju($nome_aluno,$usuario,$conexao);
-        $_SESSION['cargo'] = $nome_nivel[3];
+        $_SESSION['nome'] = $nome_aluno['UsrNome'];
+        $_SESSION['breno'] = $_SESSION['breno'];
         header('location: painel.php');
+        
         exit();
     } else{
         $_SESSION['nao_autenticado'] = true;
@@ -35,11 +36,11 @@ function logar($usuario,$senha,$conexao){
 }
 
 function ju($nome_aluno,$usuario,$conexao){
-    $nome_nivel = array(0,0);
     acessoNivel($usuario,$conexao,$usuario);
-    if(acessoDescricao($conexao,$NivId,$usuario)!="FALSO"){
-        array_push($nome_nivel,$nome_aluno,$desc['NivDescricao']);
-        return $nome_nivel;
+    if(acessoDescricao($conexao,$NivId,$usuario)){
+        $array = array($nome_aluno,$desc['NivDescricao']);
+        $_SESSION['breno'] = $desc["NivDescricao"];
+        return $_SESSION['breno'];
     }else{
         return FALSE;
     }
@@ -66,10 +67,7 @@ function acessoDescricao($conexao,$NivId,$usuario){
     $query = "SELECT NivDescricao from cofnivelacesso where NivId = ('{$NivId['NivId']}')";
     $result = mysqli_query($conexao,$query);
     $desc = mysqli_fetch_assoc($result);
-    if($desc){
-        return $desc;
-    }else{
-        return "FALSO";
-    }
+    return $desc;
+    
 }
 ?>
