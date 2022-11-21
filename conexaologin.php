@@ -7,6 +7,7 @@ if(empty($_POST['Usuario']) || empty($_POST['Senha'])){
     exit();
 
 }else{
+    $arry = ();
     $usuario = mysqli_real_escape_string($conexao, $_POST['Usuario']);
     $senha = mysqli_real_escape_string($conexao,$_POST['Senha']);
 
@@ -18,56 +19,48 @@ function logar($usuario,$senha,$conexao){
     $query = "SELECT UsrNome FROM cadusuario where UsrLogin = '{$usuario}' and UsrSenha = md5('{$senha}')";#possivel erro mysql md5 senha olha pra ca rafael fdp
     $result = mysqli_query($conexao, $query);
     $row = mysqli_num_rows($result);
-    if($row == 1){
+
+    if($row == 1){  
+
         $nome_aluno =  mysqli_fetch_assoc($result);
-        ju($nome_aluno,$usuario,$conexao);
-        $_SESSION['nome'] = $nome_aluno['UsrNome'];
-        $_SESSION['breno'] = $_SESSION['breno'];
-        header('location: painel.php');
+        if(liberarAcesso($conexao,$usuario)){
+            $a =  mysqli_fetch_assoc($resulta);
+            array_push($arry,$nome_aluno['UsrNome'],$a['NivDescricao']);
+
+            $_SESSION['nome'] = $nome_aluno['UsrNome'];
+            $_SESSION['bre'] = $arry[1];
+
+            header('location: painel.php');
+            exit();
+        } else{
+            $_SESSION['nao_autenticado'] = true;
+            header('location: pglogin.php');
+            exit;
+        }   
+    }
+}
+function liberarAcesso($conexao,$usuario){
+    $queryID = "SELECT Usrid as id from cadusuario where UsrLogin =('{$usuario}')";
+    $resultId = mysqli_query($conexao,$queryID);
+    $exite = mysqli_num_rows($resultId);
+    if($exite == 1){
+        $Usrid = mysqli_fetch_assoc($resultId);
         
-        exit();
-    } else{
-        $_SESSION['nao_autenticado'] = true;
-        header('location: pglogin.php');
-        exit;
+        $queryNIV = "SELECT UsrId,NivId from cadusuarioacesso where Usrid = ('{$Usrid['id']}')";
+        $resultNIV = mysqli_query($conexao,$queryNIV);
+        $NivExiste = mysqli_num_rows($resultId);
+
+        if($NivExiste == 1){
+            $NivId = mysqli_fetch_assoc($resultNIV);
+            $queryDisc = " SELECT NivDescricao from cofnivelacesso where NivId = ('{$NivId['NivId']}')";
+            $resultd = mysqli_query($conexao,$queryDisc);
+            
+            return $resulta;
+            
+            }
+
+        }
+
     }
-    
 
-}
-
-function ju($nome_aluno,$usuario,$conexao){
-    acessoNivel($usuario,$conexao,$usuario);
-    if(acessoDescricao($conexao,$NivId,$usuario)){
-        $array = array($nome_aluno,$desc['NivDescricao']);
-        $_SESSION['breno'] = $desc["NivDescricao"];
-        return $_SESSION['breno'];
-    }else{
-        return FALSE;
-    }
-}
-
-
-function pegarUsrid($usuario,$conexao){
-    $query = "SELECT Usrid from cadusuario where UsrLogin =('{$usuario}')";
-    $result = mysqli_query($conexao,$query);
-    $id = mysqli_fetch_assoc($result);
-
-    return $id;
-}
-function acessoNivel($usuario,$conexao){
-    pegarUsrid($usuario,$conexao);
-    $query = "SELECT Usrid,NivId from cadusuarioacesso where Usrid = ('{$id['Usrid']}')";
-    $result = mysqli_query($conexao,$query);
-    $NivId = mysqli_fetch_assoc($result);
-
-    return $NivId;
-}
-function acessoDescricao($conexao,$NivId,$usuario){
-    acessoNivel($usuario,$conexao);
-    $query = "SELECT NivDescricao from cofnivelacesso where NivId = ('{$NivId['NivId']}')";
-    $result = mysqli_query($conexao,$query);
-    $desc = mysqli_fetch_assoc($result);
-    return $desc;
-    
-}
 ?>

@@ -22,7 +22,7 @@ function verificar($usuario,$matricula,$conexao){
     $sql = "select count(*) as total from cadusuario where UsrLogin = '$usuario' or UsrMatricula = '$matricula'";
     $result = mysqli_query($conexao,$sql);
     $row = mysqli_fetch_assoc($result);
-    if($row['total'] === 1){
+    if($row['total'] >= 1){
         $_SESSION['userExiste'] = true;
         header('location:pgcadastro.php');
         exit;
@@ -34,13 +34,14 @@ function cadastrar($nome,$senha,$usuario,$matricula,$conexao){
     if(verificar($usuario,$matricula,$conexao) == "FALSO"){
         $sql = "INSERT INTO cadusuario (UsrNome,UsrSenha,UsrLogin,UsrMatricula) values('$nome','$senha','$usuario','$matricula')";
         if($conexao->query($sql) == TRUE){
-        if(nivelAcesso($nome,$senha,$usuario,$matricula,$conexao)==="TRUE"){
-            $_SESSION['statusCadastro'] = true;
-            $conexao -> close();
-            $_SESSION['nome'] = $nome;
-            header('location: painel.php');
-            exit;
+                if(nivelAcesso($nome,$senha,$usuario,$matricula,$conexao)==="TRUE"){
+                $_SESSION['statusCadastro'] = true;
+                $conexao -> close();
+                $_SESSION['nome'] = $nome;
+                header('location: painel.php');
+                exit;
             }else {
+                header("location:pgcadastro.php");
                 return "nao deu certo";
             }
         }  

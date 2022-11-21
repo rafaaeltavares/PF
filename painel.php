@@ -1,6 +1,6 @@
 <?php
 session_start();
-echo $_SESSION["breno"]
+
 ?>
 <!DOCTYPE html>
 <!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
@@ -87,7 +87,7 @@ echo $_SESSION["breno"]
       </div>
       <div class="name-job">
         <div class="profile_name"><?php echo $_SESSION["nome"];?></div>
-        <div class="job"><?php echo $_SESSION["breno"];?></div>
+        <div class="job"><?php echo $_SESSION["bre"];?></div>
       </div>
       <a href="logout.php"><i class='bx bx-log-out'></i></a>
     </div>
