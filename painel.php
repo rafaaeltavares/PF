@@ -3,13 +3,10 @@ session_start();
 
 ?>
 <!DOCTYPE html>
-<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="UTF-8">
-    <!--<title> Drop Down Sidebar Menu | CodingLab </title>-->
     <link rel="stylesheet" href="css/csspanel.css">
-    <!-- Boxiocns CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/4/41/Logotipo_cefet-rj.jpg">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -104,7 +101,7 @@ session_start();
   let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {
     arrow[i].addEventListener("click", (e)=>{
-   let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+   let arrowParent = e.target.parentElement.parentElement;
    arrowParent.classList.toggle("showMenu");
     });
   }
