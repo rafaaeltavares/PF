@@ -39,7 +39,7 @@ session_start();
             unset($_SESSION['nao_autenticado']);
             ?>
 
-            <form action="conexaologin.php" method="POST">
+            <form action="Verifilogin.php" method="POST">
 
                 <div class="inputBox">
                     <!--<input type="text" required="required">-->
