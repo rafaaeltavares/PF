@@ -10,6 +10,7 @@ session_start();
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/4/41/Logotipo_cefet-rj.jpg">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     
    </head>
 <body>
   <div class="sidebar close">
@@ -82,7 +83,7 @@ session_start();
       <li>
     <div class="profile-details">
       <div class="profile-content">
-        <!--<img src="image/profile.jpg" alt="profileImg">-->
+        <img src="imagens/profile.png" alt="profileImg">
       </div>
       <div class="name-job">
         <div class="profile_name"><?php echo $_SESSION["nome"];?></div>
@@ -95,6 +96,38 @@ session_start();
   </div>
   <section class="home-section">
     <div class="home-content">
+
+
+
+
+
+      <!-- AddToAny BEGIN -->
+      <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-icon-color="transparent,midnightblue";>
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_facebook_messenger"></a>
+<a class="a2a_button_telegram"></a>
+<a class="a2a_button_microsoft_teams"></a>
+</div>
+
+
+<script>
+var a2a_config = a2a_config || {};
+
+a2a_config.thanks = {
+    postShare: true,
+    ad: true,
+};
+</script>
+
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+
+
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
       <i class='bx bx-menu' ></i>
       <span class="text">Bem vindo Aluno(a)!</span>
  
