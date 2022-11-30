@@ -27,34 +27,36 @@ session_start();
           <li><a class="link_name" href="painel.php">Home</a></li>
         </ul>
       </li>
+      
       <li>
         <div class="iocn-link">
-          <a href="#">
+          <a href="#" id ='sp'>
             <i class='bx bx-book-alt' ></i>
             <span class="link_name">Posts</span>
           </a>
         </div>
         <ul class="sub-menu">
-          <li><a class="link_name" href="#">Posts</a></li>
+          <li><a class="link_name" href="#" id='ps'>Posts</a></li>
           
         </ul>
       </li>
+
       <li>
         <a href="#">
         <i class='bx bx-map-alt'></i>
-          <span class="link_name">Mapa campus</span>
+          <span class="link_name" >Mapa campus</span>
         </a>
         <ul class="sub-menu blank">
           <li><a class="link_name" href="#">Mapa do campus</a></li>
         </ul>
       </li>
       <li>
-        <a href="#">
+        <a href="pgbaixar.html" id='mc'>
           <i class='bx bx-notepad' ></i>
           <span class="link_name">Provas</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Provas anteriores</a></li>
+          <li><a class="link_name" href="pgbaixar.html" id='cm'>Provas anteriores</a></li>
         </ul>
       </li>
 
@@ -95,6 +97,58 @@ session_start();
     <div class="home-content">
       <i class='bx bx-menu' ></i>
       <span class="text">Bem vindo Aluno(a)!</span>
+ 
+      <?php
+        $acesso = isset($_SESSION['status_visita']);
+      ?>
+      <script>
+      const acesso = '<?php echo $acesso; ?>'
+
+      if(acesso){
+          
+
+        const link = document.getElementById('mc')
+        const link1 = document.getElementById('cm')
+
+        const posts = document.getElementById('ps')
+        const posts1 = document.getElementById('sp')
+
+        link.addEventListener('click',function(e){
+          link.classList.add('nãoClicar')
+          e.preventDefault();
+
+          
+          
+        })
+        link1.addEventListener('click',function(e){
+          e.preventDefault();
+        })
+
+        posts.addEventListener('click',function(e){
+          e.preventDefault();
+        })
+        posts1.addEventListener('click',function(e){
+          e.preventDefault();
+        })
+      }
+      </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
   </section>
   <script>

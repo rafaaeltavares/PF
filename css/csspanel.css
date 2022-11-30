@@ -258,3 +258,8 @@
     left: 0;
   }
 }
+.nãoClicar{
+  pointer-events: none;
+}
+
+
