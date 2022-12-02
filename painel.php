@@ -25,7 +25,7 @@ session_start();
           <span class="link_name">Home</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="painel.php">Home</a></li>
+          <li><a class="link_name" href="./painel.php">Home</a></li>
         </ul>
       </li>
       
@@ -57,7 +57,7 @@ session_start();
           <span class="link_name">Provas</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="pgbaixar.html" id='cm'>Provas anteriores</a></li>
+          <li><a class="link_name" href="./pgbaixar.php" id='cm'>Provas anteriores</a></li>
         </ul>
       </li>
 
@@ -76,7 +76,7 @@ session_start();
           <span class="link_name">Contato</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Contactar desenvolvedores</a></li>
+          <li><a class="link_name" href="./pgcontato.php">Contactar desenvolvedores</a></li>
         </ul>
       </li>
     
@@ -97,7 +97,11 @@ session_start();
   <section class="home-section">
     <div class="home-content">
 
-
+    <?php if(isset($_SESSION['postagem'])):?>
+    <div class="posts">
+      <?php echo $_SESSION['postagem']['post'];?>
+    </div>
+   <?php endif;?>
 
 <script>
 var a2a_config = a2a_config || {};

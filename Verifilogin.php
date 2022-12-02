@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include('conexao.php');
+include("./conexao.php");
 
 if(empty($_POST['Usuario']) || empty($_POST['Senha'])){
     header('location: pglogin.php');
