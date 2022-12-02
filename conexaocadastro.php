@@ -40,12 +40,14 @@ function cadastrar($nome,$senha,$usuario,$matricula,$conexao){
                 $acesso = liberar($conexao,$usuario);
                 $CONTA = [
                     'nome' => $nome,
-                    'acesso' => $acesso
+                    'acesso' => $acesso,
+                    'usuario' => $usuario
                 ];
                 $_SESSION['statusCadastro'] = true;
                 $conexao -> close();
                 $_SESSION['nome'] = $CONTA['nome'];
-                $_SESSION['bre'] = $CONTA['acesso'];
+                $_SESSION['acesso'] = $CONTA['acesso'];
+                $_SESSION['usr'] = $CONTA['usuario'];
                 header('location: painel.php');
                 exit;
             }else {

@@ -1,14 +1,17 @@
 <?php
 session_start();
-$usuario = 'visitante';
+$nome = 'visitante';
 $ac = "visita";
+$usuario = 'visitante';
 $CONTA = [
-    'nome' => $usuario,
-    'acesso' => $ac
+    'nome' => $nome,
+    'acesso' => $ac,
+    'usuario' =>$usuario
 ];
 
 $_SESSION['status_visita'] = TRUE;
 $_SESSION ['nome'] = $CONTA["nome"];
-$_SESSION ['bre'] = $CONTA["acesso"];
+$_SESSION ['acesso'] = $CONTA["acesso"];
+$_SESSION ['usr'] = $CONTA["usuario"];
 header('location:painel.php');
 ?>
