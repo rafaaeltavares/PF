@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include('conexao.php');
+include("./conexao.php");
 
 if(empty($_POST['Usuario']) || empty($_POST['Senha'])){
     header('location: pglogin.php');
@@ -15,7 +15,7 @@ if(empty($_POST['Usuario']) || empty($_POST['Senha'])){
 }
 function sistemLogin($conexao,$usuario,$senha){
 
-    $query = "SELECT UsrNome from cadusuario where UsrUsuario = ('{$usuario}') and UsrSenha = ('$senha')";
+    $query = "SELECT UsrNome,UsrUsuario,Usrid from cadusuario where UsrUsuario = ('{$usuario}') and UsrSenha = ('$senha')";
 
     $result = mysqli_query($conexao,$query);
     $row = mysqli_num_rows($result);
@@ -23,13 +23,19 @@ function sistemLogin($conexao,$usuario,$senha){
     if($row == 1){
         $nome_aluno = mysqli_fetch_assoc($result);
         $acesso = liberarAcesso($conexao,$usuario);
+
         $CONTA = [
             'nome' => $nome_aluno['UsrNome'],
-            'acesso' => $acesso
+            'acesso' => $acesso,
+            'usuario' => $nome_aluno['UsrUsuario'],
+            'ID' => $nome_aluno['Usrid']
         ];
+        
         $_SESSION['nome'] = $CONTA['nome'];
-        $_SESSION['bre'] = $CONTA['acesso'];
-
+        $_SESSION['acesso'] = $CONTA['acesso'];
+        $_SESSION['usr'] = $CONTA['usuario'];
+        $_SESSION['ID'] = $CONTA['ID'];
+        $_SESSION['logado'] = TRUE;
             header('location: painel.php');
             exit();
         } else{
