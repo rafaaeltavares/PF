@@ -9,7 +9,7 @@ $CONTA = [
     'usuario' =>$usuario
 ];
 
-$_SESSION['status_visita'] = TRUE;
+
 $_SESSION ['nome'] = $CONTA["nome"];
 $_SESSION ['acesso'] = $CONTA["acesso"];
 $_SESSION ['usr'] = $CONTA["usuario"];

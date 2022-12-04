@@ -13,87 +13,74 @@
 </head>
 
 <body>
-    <div class="sidebar close">
+<div class="sidebar close">
+    <div class="logo-details">
+      <i class='bx bxl-c-plus-plus'></i>
+      <span class="logo_name">SYFET</span>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a href="painel.php">
+          <i class='bx bx-grid-alt' ></i>
+          <span class="link_name">Home</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="painel.php">Home</a></li>
+        </ul>
+      </li>
 
-        <div class="logo-details">
-          <i class='bx bxl-c-plus-plus'></i>
-          <span class="logo_name">SYFET</span>
-        </div>
-    
-        <ul class="nav-links">
-    
-    
-          <li>
-            <a href="painel.php">
-              <i class='bx bx-grid-alt' ></i>
-              <span class="link_name">Home</span>
-            </a>
-            <ul class="sub-menu blank">
-              <li><a class="link_name" href="painel.php">Home</a></li>
-            </ul>
-          </li>
-    
-    
-          <li>
-            <a href="pgmapa.php">
-            <i class='bx bx-map-alt'></i>
-              <span class="link_name">Mapa campus</span>
-            </a>
-            <ul class="sub-menu blank">
-              <li><a class="link_name" href="pgmapa.php">Mapa do campus</a></li>
-            </ul>
-          </li>
-    
-    
-          <li>
-            <a href="pgbaixar.html">
-              <i class='bx bx-notepad' ></i>
-              <span class="link_name">Provas</span>
-            </a>
-            <ul class="sub-menu blank">
-            <li><a class="link_name" href="pgbaixar.html" id='cm'>Provas anteriores</a></li>
-            </ul>
-          </li>
-    
-    
-          <li>
-            <a href="#">
-              <i class='bx bx-compass' ></i>
-              <span class="link_name">Comunidade</span>
-            </a>
-            <ul class="sub-menu blank">
-              <li><a class="link_name" href="#">Comunidade Digital</a></li>
-            </ul>
-          </li>
-    
-    
-          <li>
-            <a href="pgcontato.php">
-              <i class='bx bx-comment-dots'></i>
-              <span class="link_name">Contato</span>
-            </a>
-            <ul class="sub-menu blank">
-              <li><a class="link_name" href="pgcontato.php">Contactar desenvolvedores</a></li>
-            </ul>
-          </li>
-        
-    
-          <li>
-        <div class="profile-details">
-          <div class="profile-content">
-          </div>
-          <div class="name-job">
-            <div class="profile_name"><?php echo $_SESSION["nome"];?></div>
-            <div class="job"><?php echo $_SESSION["bre"];?></div>
-          </div>
-          <a href="logout.php"><i class='bx bx-log-out'></i></a>
-        </div>
+      <li>
+        <a href="#">
+        <i class='bx bx-map-alt'></i>
+          <span class="link_name" >Mapa campus</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Mapa do campus</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="pgbaixar.php" id='mc'>
+          <i class='bx bx-notepad' ></i>
+          <span class="link_name">Provas</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="pgbaixar.php" id='cm'>Provas anteriores</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="pgComunidadeDigital.php">
+          <i class='bx bx-compass' ></i>
+          <span class="link_name">Comunidade</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="pgComunidadeDigital.php">Comunidade Digital</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="pgcontato.php">
+          <i class='bx bx-comment-dots'></i>
+          <span class="link_name">Contato</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="pgcontato.php">Contactar desenvolvedores</a></li>
+        </ul>
       </li>
     
-    
-    </ul>
+      <li>
+    <div class="profile-details">
+      <div class="profile-content">
+        <img src="imagens/profile.jpg" alt="profileImg">
+      </div>
+      <div class="name-job">
+        <div class="profile_name"><?php echo $_SESSION['usr'];?></div>
+        <div class="job"><?php echo $_SESSION["acesso"];?></div>
+      </div>
+      <a href="logout.php"><i class='bx bx-log-out'></i></a>
     </div>
-
+  </li>
+</ul>
+</div>
           <section class="home-section">
             <div class="home-content">
               <i class='bx bx-menu' ></i>

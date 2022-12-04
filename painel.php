@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+include('conexao.php');
+include('painelScript.php');
 ?>
 <!DOCTYPE html>
 
@@ -9,6 +10,10 @@ session_start();
     <link rel="stylesheet" href="css/csspanel.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/4/41/Logotipo_cefet-rj.jpg">
+    <script async src="https://static.addtoany.com/menu/page.js"></script>
+    <script async src="https://static.addtoany.com/menu/page.js"></script>
+    
+
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      
    </head>
@@ -20,29 +25,16 @@ session_start();
     </div>
     <ul class="nav-links">
       <li>
-        <a href="#">
+        <a href="painel.php">
           <i class='bx bx-grid-alt' ></i>
           <span class="link_name">Home</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="./painel.php">Home</a></li>
-        </ul>
-      </li>
-      
-      <li>
-        <div class="iocn-link">
-          <a href="#" id ='sp'>
-            <i class='bx bx-book-alt' ></i>
-            <span class="link_name">Posts</span>
-          </a>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#" id='ps'>Posts</a></li>
-          
+          <li><a class="link_name" href="painel.php">Home</a></li>
         </ul>
       </li>
 
-      <li>
+      <li id="mapaCampus">
         <a href="#">
         <i class='bx bx-map-alt'></i>
           <span class="link_name" >Mapa campus</span>
@@ -57,26 +49,26 @@ session_start();
           <span class="link_name">Provas</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="./pgbaixar.php" id='cm'>Provas anteriores</a></li>
+          <li><a class="link_name" href="pgbaixar.php" id='cm'>Provas anteriores</a></li>
         </ul>
       </li>
 
-      <li>
-        <a href="#">
+      <li id="comunidade">
+        <a href="pgComunidadeDigital.php">
           <i class='bx bx-compass' ></i>
           <span class="link_name">Comunidade</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Comunidade Digital</a></li>
+          <li><a class="link_name" href="pgComunidadeDigital.php">Comunidade Digital</a></li>
         </ul>
       </li>
       <li>
-        <a href="#">
+        <a href="pgcontato.php">
           <i class='bx bx-comment-dots'></i>
           <span class="link_name">Contato</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="./pgcontato.php">Contactar desenvolvedores</a></li>
+          <li><a class="link_name" href="pgcontato.php">Contactar desenvolvedores</a></li>
         </ul>
       </li>
     
@@ -95,69 +87,70 @@ session_start();
 </ul>
   </div>
   <section class="home-section">
-    <div class="home-content">
-
-    <?php if(isset($_SESSION['postagem'])):?>
-    <div class="posts">
-      <?php echo $_SESSION['postagem']['post'];?>
-    </div>
-   <?php endif;?>
-
-<script>
-var a2a_config = a2a_config || {};
-
-a2a_config.thanks = {
-    postShare: true,
-    ad: true,
-};
-</script>
-
-<script async src="https://static.addtoany.com/menu/page.js"></script>
-
-
-
-<script async src="https://static.addtoany.com/menu/page.js"></script>
-<!-- AddToAny END -->
+    <div class="home-content"> 
       <i class='bx bx-menu' ></i>
-      <div class="nomao">
-      <span class="text">Olá <?php echo $_SESSION["nome"];?></span>
+          <div class="nomao">
+            <span class="text">Olá <?php echo $_SESSION["nome"];?></span>
+          </div>
+    </div>
+    <div class='post-pai'>
+        <?php
+          $query = "select * from postagem inner join cadusuario on postagem.Usrid = cadusuario.Usrid order by hora desc;";
+          $resultado = mysqli_query($conexao,$query);
+            if(mysqli_num_rows($resultado) > 0){
+                    
+              while($linhas = mysqli_fetch_assoc($resultado)){
+
+                echo "<span>@{$linhas['UsrUsuario']} {$linhas['hora']}</span>" ;
+                
+                echo "<p>{$linhas['mensagem']}</p>";
+              }
+
+            }
+        ?>
+    </div>
+
+<input type="button" class='myButton' value='+'>
+    <?php
+        if(isset($_SESSION['logado'])):
+      ?>
+      <div class="form">
+
+        <form action='postagem.php' method='POST'>
+    
+          <?php $_SESSION['ID']?>
+          <textarea name="msg" id="txtArea" cols="30" rows="10" placeholder='Como foi o seu dia <?php echo $_SESSION['usr']?>'></textarea>
+          
+          <input type="SUBMIT" value="postar">
+
+        </form>
       </div>
       <?php
-        $acesso = isset($_SESSION['status_visita']);
-      ?>
-      <script>
-      const acesso = '<?php echo $acesso; ?>'
+      endif;
+    ?>
+  <script src='ScriptSideBar.js'></script>
+  <script src='ScriptPainel.js'></script>
+  <script>
+    const Acesso = "<?php echo isset($_SESSION['logado']); ?>"
+    const pgIdsBloqueados = ['comunidade','mapaCampus'];
+  if(!Acesso){
+      pgIdsBloqueados.forEach(function(ids){
 
-      if(acesso){
-          
-
-        const link = document.getElementById('mc')
-        const link1 = document.getElementById('cm')
-
-        const posts = document.getElementById('ps')
-        const posts1 = document.getElementById('sp')
-
-        link.addEventListener('click',function(e){
-          link.classList.add('nãoClicar')
+      let bloqueados = document.getElementById(""+ids);
+      bloqueados.addEventListener('click',function(e){
           e.preventDefault();
-
-          
-          
-        })
-        link1.addEventListener('click',function(e){
-          e.preventDefault();
-        })
-
-        posts.addEventListener('click',function(e){
-          e.preventDefault();
-        })
-        posts1.addEventListener('click',function(e){
-          e.preventDefault();
-        })
-      }
-      </script>
-
-
+      
+          })
+      })
+    }
+  </script>
+  
+  </section>
+</body>
+</html>
+<!-- Rafa, terminar de bloquear o acesso dos visitantes às paginas determinadas!
+ver como colocar uma variavel em um document.querySelector. boa notieee
+-->
 <!-- 
 <div class="divinha">
   <div class="a2a_kit a2a_kit_size_32 a2a_horizontal" data-a2a-icon-color="transparent,midnightblue";>
@@ -170,46 +163,22 @@ a2a_config.thanks = {
     <a class="a2a_button_microsoft_teams"></a>
   </div>
 </div> -->
-<input type="button" class='myButton' value='+'>
-<div class="form">
-  <form action='postagem.php' method='POST'>
-    <?php $_SESSION['ID']?>
-    <textarea name="msg" id="txtArea" cols="30" rows="10" placeholder='Como foi o seu dia <?php echo $_SESSION['usr']?>'></textarea>
-    <input type="SUBMIT" value="postar">
-  </form>
-</div>
+
+
 <!-- asdasdasd
 asda -->
 <!-- <bu class="myButton">+</a> -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-  </section>
-  <script>
-  let arrow = document.querySelectorAll(".arrow");
-  for (var i = 0; i < arrow.length; i++) {
-    arrow[i].addEventListener("click", (e)=>{
-   let arrowParent = e.target.parentElement.parentElement;
-   arrowParent.classList.toggle("showMenu");
-    });
-  }
-  let sidebar = document.querySelector(".sidebar");
-  let sidebarBtn = document.querySelector(".bx-menu");
-  console.log(sidebarBtn);
-  sidebarBtn.addEventListener("click", ()=>{
-    sidebar.classList.toggle("close");
-  });
-  </script>
-</body>
-</html>
+      
+      <!-- <li>
+        <div class="iocn-link">
+          <a href="#" id ='sp'>
+            <i class='bx bx-book-alt' ></i>
+            <span class="link_name">Posts</span>
+          </a>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#" id='ps'>Posts</a></li>
+          
+        </ul>
+      </li> -->

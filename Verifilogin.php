@@ -35,6 +35,7 @@ function sistemLogin($conexao,$usuario,$senha){
         $_SESSION['acesso'] = $CONTA['acesso'];
         $_SESSION['usr'] = $CONTA['usuario'];
         $_SESSION['ID'] = $CONTA['ID'];
+        $_SESSION['logado'] = TRUE;
             header('location: painel.php');
             exit();
         } else{
