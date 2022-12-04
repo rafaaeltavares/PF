@@ -2,6 +2,7 @@
 session_start();
 include('conexao.php');
 include('painelScript.php');
+$adm ="administrador";
 ?>
 <!DOCTYPE html>
 
@@ -95,30 +96,31 @@ include('painelScript.php');
     </div>
     <div class='post-pai'>
         <?php
-          $query = "select * from postagem inner join cadusuario on postagem.Usrid = cadusuario.Usrid order by hora desc;";
+          $query = "select * from postagem inner join cadusuario on postagem.Usrid = cadusuario.Usrid = 1 order by hora desc;";
           $resultado = mysqli_query($conexao,$query);
             if(mysqli_num_rows($resultado) > 0){
                     
               while($linhas = mysqli_fetch_assoc($resultado)){
-
-                echo "<span>@{$linhas['UsrUsuario']} {$linhas['hora']}</span>" ;
-                
-                echo "<p>{$linhas['mensagem']}</p>";
+                if($linhas['NivId'] == 1){
+                  
+                  echo "<span>@{$linhas['UsrUsuario']} {$linhas['hora']}</span>" ;
+                  
+                  echo "<p>{$linhas['mensagem']}</p>";
+                }
               }
-
             }
         ?>
     </div>
 
 <input type="button" class='myButton' value='+'>
     <?php
-        if(isset($_SESSION['logado'])):
+        if($_SESSION['acesso'] === $adm):
       ?>
       <div class="form">
-
         <form action='postagem.php' method='POST'>
     
           <?php $_SESSION['ID']?>
+          <?php $_SESSION['usr']?>
           <textarea name="msg" id="txtArea" cols="30" rows="10" placeholder='Como foi o seu dia <?php echo $_SESSION['usr']?>'></textarea>
           
           <input type="SUBMIT" value="postar">
@@ -127,6 +129,7 @@ include('painelScript.php');
       </div>
       <?php
       endif;
+
     ?>
   <script src='ScriptSideBar.js'></script>
   <script src='ScriptPainel.js'></script>
