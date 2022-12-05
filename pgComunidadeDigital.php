@@ -107,13 +107,10 @@ include('painelScript.php');
     </div>
 
 <input type="button" class='myButton' value='+'>
-    <?php
-        if(isset($_SESSION['logado'])):
-      ?>
       <div class="form">
 
         <form action='postagem.php' method='POST'>
-    
+            
           <?php $_SESSION['ID']?>
           <textarea name="msg" id="txtArea" cols="30" rows="10" placeholder='Como foi o seu dia <?php echo $_SESSION['usr']?>'></textarea>
           
@@ -121,9 +118,6 @@ include('painelScript.php');
 
         </form>
       </div>
-      <?php
-      endif;
-    ?>
   <script src='ScriptSideBar.js'></script>
   <script src='ScriptPainel.js'></script>
   </section>
