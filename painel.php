@@ -44,7 +44,7 @@ $adm ="administrador";
           <li><a class="link_name" href="#">Mapa do campus</a></li>
         </ul>
       </li>
-      <li>
+      <li id="provas">
         <a href="pgbaixar.php" id='mc'>
           <i class='bx bx-notepad' ></i>
           <span class="link_name">Provas</span>
@@ -91,7 +91,9 @@ $adm ="administrador";
     <div class="home-content"> 
       <i class='bx bx-menu' ></i>
           <div class="nomao">
-            <span class="text">Olá <?php echo $_SESSION["nome"];?></span>
+            <span class="text">Olá <?php echo $_SESSION["nome"];?>
+            <a href="perfil.php">perfil<a>
+          </span>
           </div>
     </div>
     <div class='post-pai'>
@@ -141,7 +143,7 @@ $adm ="administrador";
 
       let bloqueados = document.getElementById(""+ids);
       bloqueados.addEventListener('click',function(e){
-          e.preventDefault();
+      e.preventDefault();
       
           })
       })
