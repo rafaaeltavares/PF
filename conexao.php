@@ -1,7 +1,7 @@
 <?php
-define("HOST",'127.0.0.1:3306');
+define("HOST",'127.0.0.1:3309');
 define("USUARIO","root");
-define("SENHA","");
+define("SENHA","123123");
 define("DB","login");
 
 #variavel que passa a instancia da conexxao
