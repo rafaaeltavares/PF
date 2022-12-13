@@ -158,21 +158,17 @@ include('fotoPerfil.php');
             <div class="contentUsuario">
               <form action="AlterarPerfil.php" method='POST'>
                 Usuário:<br>
-                <input type="text" name="usuario" placeholder='@Novo usuário' value=" "><br>
-              </form>
-              <form>
+                <input type="text" name="usuario" placeholder='@Novo usuário' value=""><br>
                 E-mail instituicional:<br>
-                <input type="email" name="emailInstituicional" placeholder='1234@cefet-rj.br' value=" "><br>
-              </form>
-              <form>
+                <input type="email" name="emailInstituicional" placeholder='1234@cefet-rj.br' value=""><br>
+      
                 E-mail Comum:<br>
-                <input type="email" name="emailComum" placeholder='fulano@siclano.com' value=" "><br>
-              </form>
-              <form>
+                <input type="email" name="emailComum" placeholder='fulano@siclano.com' value=""><br>
+              
                 Biografia<br>
 
-                <textarea name="biografia" cols="30" rows="10" placeholder='Conte-nos mais sobre você!' value=" "></textarea><br><br>
-                </form>
+                <textarea name="biografia" cols="30" rows="10" placeholder='Conte-nos mais sobre você!' value=""></textarea><br><br>
+        
                 <input type='submit' value='Salvar alterações'>
               </form>
             </div>
