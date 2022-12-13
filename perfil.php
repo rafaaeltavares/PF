@@ -119,6 +119,7 @@ include('fotoPerfil.php');
                       echo "<a href='pglogin.php' class='linkBio'>Logue-se para editar.</a>";
                     }else{
                       echo "<input type=button value='Editar Perfil' class='editarBtn'>";
+                      echo 'teste';
                     }?>
               </div>
             </div>
@@ -181,7 +182,7 @@ include('fotoPerfil.php');
             </div>
           </div>  
       </div>
-        
+
     <script src='ScriptSideBar.js'></script>
     <script src='ScriptPainel.js'></script>
     <script>
