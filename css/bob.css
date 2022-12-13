@@ -5,6 +5,11 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+
+}
+
+body{
+  background-color: #E4E9F7;
 }
 .sidebar{
   position: fixed;
@@ -210,10 +215,10 @@
 }
 .home-section{
   position: relative;
-  background: #ffffff;
-  height: 100vh;
+  background: #E4E9F7;
+  height: 100%;
   left: 260px;
-  width: calc(100% - 260px);
+  width: 100%;
   transition: all 0.5s ease;
 }
 .sidebar.close ~ .home-section{
@@ -258,45 +263,76 @@
     left: 0;
   }
 }
-.formulario{
-  position: relative;
-  width: 250px;
-  border:1px solid red;
-  display: none;
-}
-.aparecer{
-  display: flex;
 
-}
-.sumir{
-  z-index: -1;
-}
-.botaoPost{
-  background: #3498db;
-  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-  background-image: -o-linear-gradient(top, #3498db, #2980b9);
-  background-image: linear-gradient(to bottom, #3498db, #2980b9);
-  -webkit-border-radius: 17;
-  -moz-border-radius: 17;
-  border-radius: 17px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 19px;
-  padding: 0px 40px 0px 40px;
+
+
+.container a{
+  padding: 10px 20px;
+  font-size: 22px;
+  border-radius: 5px;
   text-decoration: none;
-  height: 50px; 
+  color: white;
+  background-color:#0e084e;
+  border: 1px solid rgb(4, 23, 128);
+  border-left: 10px solid rgb(136, 225, 252);
+  transition: all 0.25s ease-in-out;
 }
-.bloqueado{
-  background-color: rgb(192, 49, 49);
-  color: rgb(255, 0, 0);
-  pointer-events: none;
+
+.container a:hover{
+  background-color: white;
+  color: rgb(7, 20, 95);
 }
-.home-section .aviso p{
-  color: red;
-  display: inline-block;
-  border: 1px solid black;
-} 
 
 
+.a2020{
+  align-items: center;
+  justify-content: space-evenly; 
+  min-height: 20vh;
+  margin-top: 100px;
+  display: flex;
+}
+.a2019{
+  align-items: center;
+  justify-content: space-evenly; 
+  min-height: 20vh;
+  margin-top: -100px;
+  display: flex;
+}
+.a2018{
+  align-items: center;
+  justify-content: space-evenly; 
+  min-height: 20vh;
+  margin-top: -100px;
+  display: flex;
+}
+.a2017{
+  align-items: center;
+  justify-content: space-evenly; 
+  min-height: 20vh;
+  margin-top: -100px;
+  display: flex;
+}
+.a2016{
+  align-items: center;
+  justify-content: space-evenly; 
+  min-height: 20vh;
+  margin-top: -100px;
+  display: flex;
+  
+}
+
+
+@keyframes anim-stars {
+  from {
+      transform: translateY(938px);
+  }
+  to {
+      transform: translateY(-10px);
+  }
+}
+
+.container{
+  margin-top: 800px;
+  margin-left: 250px;
+justify-content: end;
+}

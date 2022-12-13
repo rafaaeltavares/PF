@@ -2,7 +2,10 @@
 session_start();
 include('conexao.php');
 include('painelScript.php');
+include('fotoPerfil.php');
 $adm ="administrador";
+
+
 ?>
 <!DOCTYPE html>
 
@@ -13,6 +16,7 @@ $adm ="administrador";
     <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/4/41/Logotipo_cefet-rj.jpg">
     <script async src="https://static.addtoany.com/menu/page.js"></script>
     <script async src="https://static.addtoany.com/menu/page.js"></script>
+   
     
 
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,11 +76,21 @@ $adm ="administrador";
           <li><a class="link_name" href="pgcontato.php">Contactar desenvolvedores</a></li>
         </ul>
       </li>
-    
+      
+      <li id='perfil'>
+        <a href="perfil.php" id='mc'>
+        <i class='bx bx-user'></i>
+          <span class="link_name">Perfil</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="perfil.php" id='cm'>Perfil</a></li>
+        </ul>
+      </li>
+
       <li>
     <div class="profile-details">
       <div class="profile-content">
-        <img src="imagens/profile.jpg" alt="profileImg">
+      <?php echo "<img src='upload/$fotoPerfil'>";?>
       </div>
       <div class="name-job">
         <div class="profile_name"><?php echo $_SESSION['usr'];?></div>
@@ -91,13 +105,13 @@ $adm ="administrador";
     <div class="home-content"> 
       <i class='bx bx-menu' ></i>
           <div class="nomao">
-            <span class="text">Olá <?php echo $_SESSION["nome"];?>
-            <a href="perfil.php">perfil<a>
-          </span>
+            <span class="text">Olá <?php echo $_SESSION["nome"];?></span>
           </div>
     </div>
     <div class='post-pai'>
+      <div class='tete'>
         <?php
+ 
           $query = "select * from postagem inner join cadusuario on postagem.Usrid = cadusuario.Usrid = 1 order by hora desc;";
           $resultado = mysqli_query($conexao,$query);
             if(mysqli_num_rows($resultado) > 0){
@@ -112,27 +126,45 @@ $adm ="administrador";
               }
             }
         ?>
+        
+      </div>
     </div>
 
-<input type="button" class='myButton' value='+'>
     <?php
-        if($_SESSION['acesso'] === $adm):
-      ?>
-      <div class="form">
-        <form action='postagem.php' method='POST'>
-    
-          <?php $_SESSION['ID']?>
-          <?php $_SESSION['usr']?>
-          <textarea name="msg" id="txtArea" cols="30" rows="10" placeholder='Como foi o seu dia <?php echo $_SESSION['usr']?>'></textarea>
-          
-          <input type="SUBMIT" value="postar">
-
-        </form>
-      </div>
-      <?php
-      endif;
-
+      if($_SESSION['acesso'] === $adm):
     ?>
+
+<input type="button" class='myButton' value='+'>
+  <?php 
+    endif;
+  ?>
+
+    <div class='formulario'>
+      <?php
+          if($_SESSION['acesso'] === $adm):
+        ?>
+        <div class="form">
+          <form action='postagem.php' method='POST'>
+      
+            <?php $_SESSION['ID']?>
+            <?php $_SESSION['usr']?>
+            <textarea name="msg" id="txtArea" cols="30" rows="10" placeholder='Como foi o seu dia <?php echo $_SESSION['usr']?>'></textarea>
+            
+            <input type="SUBMIT" value="postar">
+
+          </form>
+        </div>
+
+    <?php
+      endif;
+    ?>
+    </div>
+  <div class="aviso">
+    <p>Você não pode acessar isso. Apenas alunos já matriculados na nossa instituição</p>
+  </div>
+
+
+  <script src='scriptFazerPostagem.js'></script>
   <script src='ScriptSideBar.js'></script>
   <script src='ScriptPainel.js'></script>
   <script>
@@ -143,20 +175,21 @@ $adm ="administrador";
 
       let bloqueados = document.getElementById(""+ids);
       bloqueados.addEventListener('click',function(e){
-      e.preventDefault();
-      
-          })
+        bloqueados.classlist.add('bloqueado');
+
+
+        })
       })
     }
   </script>
-  
+
   </section>
 </body>
 </html>
 <!-- Rafa, terminar de bloquear o acesso dos visitantes às paginas determinadas!
 ver como colocar uma variavel em um document.querySelector. boa notieee
 -->
-<!-- 
+
 <div class="divinha">
   <div class="a2a_kit a2a_kit_size_32 a2a_horizontal" data-a2a-icon-color="transparent,midnightblue";>
     <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
@@ -167,12 +200,12 @@ ver como colocar uma variavel em um document.querySelector. boa notieee
     <a class="a2a_button_telegram"></a>
     <a class="a2a_button_microsoft_teams"></a>
   </div>
-</div> -->
+</div>
 
 
 <!-- asdasdasd
 asda -->
-<!-- <bu class="myButton">+</a> -->
+
 
       
       <!-- <li>

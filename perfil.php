@@ -3,13 +3,16 @@ session_start();
 include('conexao.php');
 include('painelScript.php');
 $adm ="administrador";
-$id = number_format($_SESSION['ID']);
+$a = isset($_SESSION['visita']);
+include('fotoPerfil.php');
+
 ?>
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
   <head>
-    <link rel="stylesheet" href="css/csspanel.css">
+
+    <link rel="stylesheet" href="css/cssperfil.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/4/41/Logotipo_cefet-rj.jpg">
     <script async src="https://static.addtoany.com/menu/page.js"></script>
@@ -73,14 +76,24 @@ $id = number_format($_SESSION['ID']);
           <li><a class="link_name" href="pgcontato.php">Contactar desenvolvedores</a></li>
         </ul>
       </li>
-    
+
+      <li id='perfil'>
+        <a href="perfil.php" id='mc'>
+        <i class='bx bx-user'></i>
+          <span class="link_name">Perfil</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="perfil.php" id='cm'>Perfil</a></li>
+        </ul>
+      </li>
+
       <li>
     <div class="profile-details">
       <div class="profile-content">
-        <img src="imagens/profile.jpg" alt="profileImg">
+        <?php echo "<img src='upload/$fotoPerfil'>";?>
       </div>
       <div class="name-job">
-        <div class="profile_name"><?php echo $_SESSION['usr'];?></div>
+        <div class="profile_name"><?php echo $_SESSION['usr']; ?></div>
         <div class="job"><?php echo $_SESSION["acesso"];?></div>
       </div>
       <a href="logout.php"><i class='bx bx-log-out'></i></a>
@@ -91,29 +104,115 @@ $id = number_format($_SESSION['ID']);
   <section class="home-section">
     <div class="home-content"> 
       <i class='bx bx-menu' ></i>
-          <div class="nomao">
-            <span class="text">Olá <?php echo $_SESSION["nome"];
-            echo $_SESSION['ID'];
-            ?></span>
-          </div>
     </div>
-    <div class='post-pai'>
-    <?php
-          $query = "select * from postagem inner join cadusuario on postagem.Usrid = cadusuario.Usrid = 1 order by hora desc;";
-          $resultado = mysqli_query($conexao,$query);
-            if(mysqli_num_rows($resultado) > 0){
+      <div class="perfil">
+        <div class="topo">
+          <div class="fotoPerfil"></div>
+        </div>
+      <div class="contentPerfil">
+          <div class="informacaoPerfil">
+              <strong><?php echo $_SESSION["nome"];?></strong>
+              <p>Biografia</p>
+              <div class="biografiaBtn">
+                <?php 
+                  if(isset($_SESSION['visita'])){
+                      echo "<a href='pglogin.php' class='linkBio'>Logue-se para editar.</a>";
+                    }else{
+                      echo "<input type=button value='Editar Perfil' class='editarBtn'>";
+                    }?>
+              </div>
+            </div>
+      </div>
+      <?php
+        if(isset($_SESSION['logado'])):
+      ?>
+        <div class='post-pai-perfil'>
+        <?php
+              $query = "select * from postagem inner join cadusuario on postagem.Usrid = cadusuario.Usrid order by hora desc;";
+              $resultado = mysqli_query($conexao,$query);
+                if(mysqli_num_rows($resultado) > 0){
+                        
+                  while($linhas = mysqli_fetch_assoc($resultado)){
+                        if($linhas['Usrid'] == $_SESSION['ID']){
+                            
+                            echo "<span>@{$linhas['UsrUsuario']} {$linhas['hora']}</span>" ;
                     
-              while($linhas = mysqli_fetch_assoc($resultado)){
-                    if($linhas['Usrid'] == $_SESSION['ID']){
-                        echo "<span>@{$linhas['UsrUsuario']} {$linhas['hora']}</span>" ;
-                
-                        echo "<p>{$linhas['mensagem']}</p>";
-                    }
-              }
-            }
-    ?>
+                            echo "<p>{$linhas['mensagem']}</p>";
+                        }
+                  }
+                }
+        ?>
+      <?php
+        endif;
+        echo isset($_SESSION['visita']);
+        if(isset($_SESSION['visita'])){
+          echo 'teste';
+        }
+      ?>
+
+        </div>
+      </div>
+      <div class="formularioEditar">
+          <div class="formulario">
+
+            <div class="contentUsuario">
+              <form action="AlterarPerfil.php" method='POST'>
+                Usuário:<br>
+                <input type="text" name="usuario" placeholder='@Novo usuário' value=" "><br>
+              </form>
+              <form>
+                E-mail instituicional:<br>
+                <input type="email" name="emailInstituicional" placeholder='1234@cefet-rj.br' value=" "><br>
+              </form>
+              <form>
+                E-mail Comum:<br>
+                <input type="email" name="emailComum" placeholder='fulano@siclano.com' value=" "><br>
+              </form>
+              <form>
+                Biografia<br>
+
+                <textarea name="biografia" cols="30" rows="10" placeholder='Conte-nos mais sobre você!' value=" "></textarea><br><br>
+                </form>
+                <input type='submit' value='Salvar alterações'>
+              </form>
+            </div>
+
+            <div class="contentFiles">
+              <form action='AlterarPerfil.php' method="POST" enctype='multipart/form-data'>
+                foto do perfil de usuário <br> <input type='file' required name='arquivoFoto'><br>
+                <input type='submit' value='Salvar Alterações de imagem'><br>
+              </form>
+              <form action="AlterarPerfil.php" method="POST" enctype='multipart/form-data'>
+                foto do banner <br> <input type='file' required name='arquivoBanner'><br>
+                <input type='submit' value='Salvar alterações de imagem'>
+              </form>
+            </div>
+          </div>  
+      </div>
+
     <script src='ScriptSideBar.js'></script>
     <script src='ScriptPainel.js'></script>
+    <script>
+
+        function mudarFotoPerfil(){
+          const foto = "<?php echo $fotoPerfil?>"
+          const caminho = "upload/"
+          const perfil = document.querySelector('.fotoPerfil');
+          perfil.style.backgroundImage = `url(${caminho + foto})`
+        }
+
+        function mudarFotoHeader(){
+        const foto = "<?php echo $fotoHeader?>"
+        const caminho = "upload/"
+        const perfil = document.querySelector('.topo');
+        perfil.style.backgroundImage = `url(${caminho + foto})`
+        }
+        mudarFotoHeader()
+        mudarFotoPerfil()
+
+
+    </script>
+    
     <script>
     const Acesso = "<?php echo isset($_SESSION['logado']); ?>"
     const pgIdsBloqueados = ['comunidade','mapaCampus'];
@@ -129,3 +228,6 @@ $id = number_format($_SESSION['ID']);
     }
     </script>
     </div>
+  </section>
+  
+  </body>

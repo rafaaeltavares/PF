@@ -12,6 +12,7 @@
   left: 0;
   height: 100%;
   width: 260px;
+  /* background-color: rebeccapurple; */
   background: #0e084e;
   z-index: 100;
   transition: all 0.5s ease;
@@ -211,7 +212,6 @@
 .home-section{
   position: relative;
   background: #ffffff;
-  height: 100vh;
   left: 260px;
   width: calc(100% - 260px);
   transition: all 0.5s ease;
@@ -222,6 +222,7 @@
 }
 .home-section .home-content{
   height: 60px;
+  position: fixed;
   display: flex;
   align-items: center;
 }
@@ -258,45 +259,121 @@
     left: 0;
   }
 }
-.formulario{
-  position: relative;
-  width: 250px;
-  border:1px solid red;
-  display: none;
-}
-.aparecer{
+.perfil{
+  width: 840px;
+  height: fit-content;
+  border-radius: 10px 10px 0 0 ;
+  border: 1px solid rgba(128, 128, 128, 0.399);
+  background-color: #fdfdff;
   display: flex;
-
+  justify-self: center;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
 }
-.sumir{
-  z-index: -1;
-}
-.botaoPost{
-  background: #3498db;
-  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-  background-image: -o-linear-gradient(top, #3498db, #2980b9);
-  background-image: linear-gradient(to bottom, #3498db, #2980b9);
-  -webkit-border-radius: 17;
-  -moz-border-radius: 17;
-  border-radius: 17px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 19px;
-  padding: 0px 40px 0px 40px;
-  text-decoration: none;
-  height: 50px; 
-}
-.bloqueado{
-  background-color: rgb(192, 49, 49);
-  color: rgb(255, 0, 0);
-  pointer-events: none;
-}
-.home-section .aviso p{
-  color: red;
-  display: inline-block;
+.topo{
+  width: 100%;
+  height: 220px;
   border: 1px solid black;
-} 
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  border-radius: 10px;
+  background-color: #0e084e;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* align-self: center; */
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: flex-start; 
+}
+.fotoPerfil{
+    /* background-image: url(""); */
+    background-position: center;
+    background-size: cover;
+    border: 6px solid white;
+    display: flex;
+    justify-content: flex-start;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    position: absolute;
+    margin-top: 120px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 
+}
+.contentPerfil{
+  background-color: #eeeef8;
+  z-index: 1;
+  border-radius: 5px;
+  min-height: 100px;
+  max-height:290px;
+  border:1px solid rgba(128, 128, 128, 0.399);
+  width:800px; 
+  display: flex;
+  margin-right: auto;
+  margin-left: 10px;
+  margin-top: 50px;
+  flex-direction: column;
+}
+.biografiaBtn{
+  display: flex;
+  justify-content: flex-end;
 
+}
+.editarBtn{
+  position: absolute;
+  display: flex;
+  margin-top: -90px;
+  background:linear-gradient(45deg, #1768a9, #4361d6e7);
+  text-decoration: none;
+  border-radius: 5px;
+  color: aliceblue;
+  font-weight: 500;
+  border: none;
+  padding: 4px;
+  -webkit-transition: all 200ms ease-in;
+  -webkit-transform: scale(0.9); 
+  -ms-transition: all 200ms ease-in;
+  -ms-transform: scale(0.9); 
+  -moz-transition: all 200ms ease-in;
+  -moz-transform: scale(0.9);
+  transition: all 200ms ease-in;
+  transform: scale(0.9); 
+}
+.editarBtn:hover{
+  color: #4361d6e7;
+  font-weight: 500;
+  background: #ffffff;
+  padding: 4px;
+  border: 2px solid rgb(24, 127, 253);
+  -webkit-transition: all 200ms ease-in;
+  -webkit-transform: scale(1);
+  -ms-transition: all 200ms ease-in;
+  -ms-transform: scale(1);   
+  -moz-transition: all 200ms ease-in;
+  -moz-transform: scale(1);
+  transition: all 200ms ease-in;
+  transform: scale(1);
+}
+.formularioEditar{
+  display: flex;
+  justify-content: center;
+}
+.formulario{
+  display: flex;
+  border: 1px solid blue;
+  width: 800px;
+  height: 500px;
+  border-radius: 10px;
+}
+.contentUsuario{
+  display: flex;
+  border: 1px solid red;
+  justify-content: left;
+  padding: 15px;
+  width: 50%;
+}
