@@ -48,7 +48,7 @@ function cadastrar($nome,$senha,$usuario,$matricula,$conexao){
                 $_SESSION['nome'] = $CONTA['nome'];
                 $_SESSION['acesso'] = $CONTA['acesso'];
                 $_SESSION['usr'] = $CONTA['usuario'];
-                header('location: painel.php');
+                header('location: pglogin.php');
                 exit;
             }else {
                 header("location:pgcadastro.php");

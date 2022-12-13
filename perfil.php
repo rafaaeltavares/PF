@@ -4,6 +4,8 @@ include('conexao.php');
 include('painelScript.php');
 $adm ="administrador";
 $a = isset($_SESSION['visita']);
+include('fotoPerfil.php');
+
 ?>
 <!DOCTYPE html>
 
@@ -88,7 +90,7 @@ $a = isset($_SESSION['visita']);
       <li>
     <div class="profile-details">
       <div class="profile-content">
-        <img src="imagens/saitama.webp" alt="profileImg">
+        <?php echo "<img src='upload/$fotoPerfil'>";?>
       </div>
       <div class="name-job">
         <div class="profile_name"><?php echo $_SESSION['usr']; ?></div>
@@ -108,67 +110,45 @@ $a = isset($_SESSION['visita']);
           <div class="fotoPerfil"></div>
         </div>
       <div class="contentPerfil">
-
           <div class="informacaoPerfil">
               <strong><?php echo $_SESSION["nome"];?></strong>
               <p>Biografia</p>
-
               <div class="biografiaBtn">
                 <?php 
                   if(isset($_SESSION['visita'])){
                       echo "<a href='pglogin.php' class='linkBio'>Logue-se para editar.</a>";
                     }else{
                       echo "<input type=button value='Editar Perfil' class='editarBtn'>";
-                    }
-                    
-                ?>
+                    }?>
               </div>
-
             </div>
       </div>
-
       <?php
-        $foto = "SELECT * from perfil where Usrid = {$_SESSION['ID']} order by hora desc";
-        $resultadoFoto = mysqli_query($conexao,$foto);
-        if(mysqli_num_rows($resultadoFoto) > 0 ){
-          $fotos = mysqli_fetch_assoc($resultadoFoto);
-          $fotoPerfil = $fotos['fotoPerfil'];
-          
-        }
-
-
+        if(isset($_SESSION['logado'])):
       ?>
-
-      
-
-
-
-              <?php
-                if(isset($_SESSION['logado'])):
-              ?>
-                <div class='post-pai-perfil'>
-                <?php
-                      $query = "select * from postagem inner join cadusuario on postagem.Usrid = cadusuario.Usrid order by hora desc;";
-                      $resultado = mysqli_query($conexao,$query);
-                        if(mysqli_num_rows($resultado) > 0){
-                                
-                          while($linhas = mysqli_fetch_assoc($resultado)){
-                                if($linhas['Usrid'] == $_SESSION['ID']){
-                                    
-                                    echo "<span>@{$linhas['UsrUsuario']} {$linhas['hora']}</span>" ;
+        <div class='post-pai-perfil'>
+        <?php
+              $query = "select * from postagem inner join cadusuario on postagem.Usrid = cadusuario.Usrid order by hora desc;";
+              $resultado = mysqli_query($conexao,$query);
+                if(mysqli_num_rows($resultado) > 0){
+                        
+                  while($linhas = mysqli_fetch_assoc($resultado)){
+                        if($linhas['Usrid'] == $_SESSION['ID']){
                             
-                                    echo "<p>{$linhas['mensagem']}</p>";
-                                }
-                          }
+                            echo "<span>@{$linhas['UsrUsuario']} {$linhas['hora']}</span>" ;
+                    
+                            echo "<p>{$linhas['mensagem']}</p>";
                         }
-                ?>
-              <?php
-                endif;
-                echo isset($_SESSION['visita']);
-                if(isset($_SESSION['visita'])){
-                  echo 'teste';
+                  }
                 }
-              ?>
+        ?>
+      <?php
+        endif;
+        echo isset($_SESSION['visita']);
+        if(isset($_SESSION['visita'])){
+          echo 'teste';
+        }
+      ?>
 
         </div>
       </div>
@@ -178,25 +158,33 @@ $a = isset($_SESSION['visita']);
             <div class="contentUsuario">
               <form action="AlterarPerfil.php" method='POST'>
                 Usuário:<br>
-                <input type="text" name="usuario" placeholder='@Novo usuário'><br>
+                <input type="text" name="usuario" placeholder='@Novo usuário' value=" "><br>
+              </form>
+              <form>
                 E-mail instituicional:<br>
-                <input type="email" name="emailInstituicional" placeholder='1234@cefet-rj.br'><br>
+                <input type="email" name="emailInstituicional" placeholder='1234@cefet-rj.br' value=" "><br>
+              </form>
+              <form>
                 E-mail Comum:<br>
-                <input type="email" name="emailComum" placeholder='fulano@siclano.com'><br>
+                <input type="email" name="emailComum" placeholder='fulano@siclano.com' value=" "><br>
+              </form>
+              <form>
                 Biografia<br>
-                <textarea name="bio" cols="30" rows="10" placeholder='Conte-nos mais sobre você!'></textarea><br><br>
-                
+
+                <textarea name="biografia" cols="30" rows="10" placeholder='Conte-nos mais sobre você!' value=" "></textarea><br><br>
+                </form>
                 <input type='submit' value='Salvar alterações'>
               </form>
             </div>
 
             <div class="contentFiles">
               <form action='AlterarPerfil.php' method="POST" enctype='multipart/form-data'>
-                foto do perfil de usuário <br> <input type='file'  name='arquivoFoto'><br>
-                <?php $_SESSION['ID'] ?>
+                foto do perfil de usuário <br> <input type='file' required name='arquivoFoto'><br>
                 <input type='submit' value='Salvar Alterações de imagem'><br>
-                foto do banner <br> <input type='file'  name='arquivoBanner'><br>
-
+              </form>
+              <form action="AlterarPerfil.php" method="POST" enctype='multipart/form-data'>
+                foto do banner <br> <input type='file' required name='arquivoBanner'><br>
+                <input type='submit' value='Salvar alterações de imagem'>
               </form>
             </div>
           </div>  
@@ -207,27 +195,24 @@ $a = isset($_SESSION['visita']);
     <script>
 
         function mudarFotoPerfil(){
-        const foto = "<?php echo $fotoPerfil?>"
+          const foto = "<?php echo $fotoPerfil?>"
+          const caminho = "upload/"
+          const perfil = document.querySelector('.fotoPerfil');
+          perfil.style.backgroundImage = `url(${caminho + foto})`
+        }
+
+        function mudarFotoHeader(){
+        const foto = "<?php echo $fotoHeader?>"
         const caminho = "upload/"
-        const perfil = document.querySelector('.fotoPerfil');
+        const perfil = document.querySelector('.topo');
         perfil.style.backgroundImage = `url(${caminho + foto})`
         }
+        mudarFotoHeader()
         mudarFotoPerfil()
 
 
     </script>
     
-
-
-
-
-
-
-
-
-
-
-
     <script>
     const Acesso = "<?php echo isset($_SESSION['logado']); ?>"
     const pgIdsBloqueados = ['comunidade','mapaCampus'];
@@ -244,4 +229,5 @@ $a = isset($_SESSION['visita']);
     </script>
     </div>
   </section>
+  
   </body>

@@ -2,7 +2,10 @@
 session_start();
 include('conexao.php');
 include('painelScript.php');
+include('fotoPerfil.php');
 $adm ="administrador";
+
+
 ?>
 <!DOCTYPE html>
 
@@ -87,7 +90,7 @@ $adm ="administrador";
       <li>
     <div class="profile-details">
       <div class="profile-content">
-        <img src="imagens/saitama.webp" alt="profileImg">
+      <?php echo "<img src='upload/$fotoPerfil'>";?>
       </div>
       <div class="name-job">
         <div class="profile_name"><?php echo $_SESSION['usr'];?></div>
@@ -186,7 +189,7 @@ $adm ="administrador";
 <!-- Rafa, terminar de bloquear o acesso dos visitantes às paginas determinadas!
 ver como colocar uma variavel em um document.querySelector. boa notieee
 -->
-<!-- 
+
 <div class="divinha">
   <div class="a2a_kit a2a_kit_size_32 a2a_horizontal" data-a2a-icon-color="transparent,midnightblue";>
     <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
@@ -197,7 +200,7 @@ ver como colocar uma variavel em um document.querySelector. boa notieee
     <a class="a2a_button_telegram"></a>
     <a class="a2a_button_microsoft_teams"></a>
   </div>
-</div> -->
+</div>
 
 
 <!-- asdasdasd
