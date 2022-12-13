@@ -4,44 +4,44 @@ session_start();
 include('conexao.php');
 include_once("inserirUsr.php");
 $id = $_SESSION['ID'];
+echo $id;
 ?>
 <?php
 
     $usuario = mysqli_real_escape_string($conexao, $_POST['usuario']);
-    $emailInsituicional = mysqli_real_escape_string($conexao,$_POST['emailInstituicional']);
+    $emailInstitucional = mysqli_real_escape_string($conexao,$_POST['emailInstitucional']);
     $emailComum = mysqli_real_escape_string($conexao,$_POST['emailComum']);
-        // $biografia = mysqli_real_escape_string($conexao,$_POST['biografia']);
+    $biografia = mysqli_real_escape_string($conexao,$_POST['biografia']);
     
+    echo $emailComum;
 
     $existe = isset($_FILES['arquivoFoto']);
     $existeCapa = isset($_FILES['arquivoBanner']);
 
 
-    function alterarPerfil($conexao,$emailInsituicional,$emailComum,$id){
-        $selecionarTudo = "select * from perfil where Usrid = $id";
+    function alterarPerfil($conexao,$emailInstitucional,$emailComum,$biografia,$id){
+        $selecionarTudo = "select emailInstitucional,emailComum,biografia from perfil where Usrid = $id";
         $output = mysqli_query($conexao,$selecionarTudo);
-        $output = mysqli_fetch_assoc($output);
-
-        if($output['emailInstitucional'] != $emailInsituicional){
-            $sql = "UPDATE perfil SET emailInstitucional = '$emailInstitucional' where Usrid = $id";
+        $resuk = mysqli_fetch_assoc($output);
+        // echo $resuk['emailInstitucional'];
+        if($resuk['emailInstitucional'] != $emailInstitucional && $emailInstitucional != NULL ){
+            $sql = "UPDATE perfil SET emailInstitucional = '$emailInstitucional', hora = now() where Usrid = $id";
 
             $sqlE = mysqli_query($conexao,$sql);
-
-            header("location:perfil.php");
-        }elseif($output['emailComum' != $emailComum]){
-            $sqlc = "UPDATE perfil SET emailComum = '$emailComum' where Usrid = $id";
-
-            $sqlC = mysqli_query($conexao,$sqlc);
-        }elseif($output['biografia'] != $biografia){
-            $sqlb = "UPDATE perfil SET biografia = '$biografia' where Usrid = $id";
-
-            $sqlb = mysqli_query($conexao,$sqlc);
+            
         }
+        if($resuk['emailComum']  != $emailComum && $emailComum != NULL){
+            $sqlc = "UPDATE perfil SET emailComum ='$emailComum', hora = now() where Usrid = $id";
+            
+            $sqlC = mysqli_query($conexao,$sqlc);
+        }
+        if($resuk['biografia'] != $biografia && $biografia != NULL){
+            $sqlb = "UPDATE perfil SET biografia = '$biografia', hora = now() where Usrid = $id";
 
-
-
-
-        
+            $resultadob = mysqli_query($conexao,$sqlb);
+        }
+   
+        header('location:perfil.php');
     }
 
     function salvarFotoPerfil($existe,$id,$conexao){
@@ -90,5 +90,5 @@ $id = $_SESSION['ID'];
         
 salvarFotoPerfil($existe,$id,$conexao);
 alterarCapaPerfil($conexao,$existeCapa,$id);
-alterarPerfil($conexao,$emailInsituicional,$emailComum,$id);
+alterarPerfil($conexao,$emailInstitucional,$emailComum,$biografia,$id);
 
