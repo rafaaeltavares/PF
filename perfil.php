@@ -90,7 +90,7 @@ include('fotoPerfil.php');
       <li>
     <div class="profile-details">
       <div class="profile-content">
-        <?php echo "<img src='upload/$fotoPerfil'>";?>
+      <?php include('fotoPerfilvisitante.php');?>
       </div>
       <div class="name-job">
         <div class="profile_name"><?php echo $_SESSION['usr']; ?></div>
@@ -181,16 +181,22 @@ include('fotoPerfil.php');
             </div>
           </div>  
       </div>
-
+        
     <script src='ScriptSideBar.js'></script>
     <script src='ScriptPainel.js'></script>
     <script>
 
         function mudarFotoPerfil(){
           const foto = "<?php echo $fotoPerfil?>"
-          const caminho = "upload/"
+          <?php if(isset($_SESSION['visitante'])):?>
+          const perfil = document.querySelector('.fotoPerfil');
+          perfil.style.backgroundImage = `url(${foto})`
+          <?php endif;
+          if(isset($_SESSION['ID'])):?>
+          const caminho = "upload/";
           const perfil = document.querySelector('.fotoPerfil');
           perfil.style.backgroundImage = `url(${caminho + foto})`
+          <?php endif;?>
         }
 
         function mudarFotoHeader(){
