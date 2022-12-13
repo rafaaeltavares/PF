@@ -2,6 +2,7 @@
 session_start();
 include('conexao.php');
 include('painelScript.php');
+include('inserirUsr.php');
 include('fotoPerfil.php');
 $adm ="administrador";
 
@@ -91,6 +92,7 @@ $adm ="administrador";
     <div class="profile-details">
       <div class="profile-content">
       <?php echo "<img src='upload/$fotoPerfil'>";?>
+
       </div>
       <div class="name-job">
         <div class="profile_name"><?php echo $_SESSION['usr'];?></div>

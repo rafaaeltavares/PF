@@ -144,10 +144,6 @@ include('fotoPerfil.php');
         ?>
       <?php
         endif;
-        echo isset($_SESSION['visita']);
-        if(isset($_SESSION['visita'])){
-          echo 'teste';
-        }
       ?>
 
         </div>

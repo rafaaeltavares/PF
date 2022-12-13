@@ -40,7 +40,7 @@ echo $id;
 
             $resultadob = mysqli_query($conexao,$sqlb);
         }
-   
+        
         header('location:perfil.php');
     }
 
