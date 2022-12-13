@@ -14,10 +14,11 @@ body{
     background: rgb(2 15 56);
 
 }
+
 .box{
     position:relative;
     width: 450px;
-    height: 700px;
+    height: 750px;
     background: #1c1c1c;
     border-radius: 8px;
     overflow: hidden;
@@ -212,4 +213,10 @@ textarea{
 echo{
     z-index:5000;
     color:rgb(255, 255, 255);
+}
+
+#a{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
 }

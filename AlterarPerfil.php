@@ -19,8 +19,8 @@ echo $id;
     $existeCapa = isset($_FILES['arquivoBanner']);
 
 
-    function alterarPerfil($conexao,$emailInstitucional,$emailComum,$biografia,$id){
-        $selecionarTudo = "select emailInstitucional,emailComum,biografia from perfil where Usrid = $id";
+    function alterarPerfil($conexao,$emailInstitucional,$emailComum,$biografia,$usuario,$id){
+        $selecionarTudo = "select emailInstitucional,emailComum,biografia,UsrUsuario from perfil where Usrid = $id";
         $output = mysqli_query($conexao,$selecionarTudo);
         $resuk = mysqli_fetch_assoc($output);
         // echo $resuk['emailInstitucional'];
@@ -40,7 +40,11 @@ echo $id;
 
             $resultadob = mysqli_query($conexao,$sqlb);
         }
-        
+        if($resuk['UsrUsuario'] != $usuario && $usuario != NULL){
+            $sqlu = "UPDATE perfil set UsrUsuario = '$usuario', hora = now() where Usrid = $id";
+
+            $resultadou = mysqli_query($conexao,$sqlu);
+        }
         header('location:perfil.php');
     }
 
@@ -90,5 +94,5 @@ echo $id;
         
 salvarFotoPerfil($existe,$id,$conexao);
 alterarCapaPerfil($conexao,$existeCapa,$id);
-alterarPerfil($conexao,$emailInstitucional,$emailComum,$biografia,$id);
+alterarPerfil($conexao,$emailInstitucional,$emailComum,$biografia,$usuario,$id);
 

@@ -312,12 +312,13 @@
   min-height: 100px;
   max-height:290px;
   border:1px solid rgba(128, 128, 128, 0.399);
-  width:800px; 
+  width:800px;
   display: flex;
   margin-right: auto;
   margin-left: 10px;
   margin-top: 50px;
   flex-direction: column;
+  flex-wrap: wrap;
 }
 .biografiaBtn{
   display: flex;
@@ -325,15 +326,19 @@
 
 }
 .editarBtn{
-  position: absolute;
+  position: relative;
   display: flex;
-  margin-top: -90px;
+  align-items: flex-end;
+  margin-top: -52px;
+  /* margin-left: 670px; */
   background:linear-gradient(45deg, #1768a9, #4361d6e7);
   text-decoration: none;
   border-radius: 5px;
   color: aliceblue;
   font-weight: 500;
   border: none;
+  height: 50px;
+
   padding: 4px;
   -webkit-transition: all 200ms ease-in;
   -webkit-transform: scale(0.9); 
@@ -376,4 +381,12 @@
   justify-content: left;
   padding: 15px;
   width: 50%;
+}
+.informacaoPerfil{
+  display: flex;
+  justify-content: flex-start;
+
+}
+.botao{
+  display: flex;
 }
