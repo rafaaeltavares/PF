@@ -115,20 +115,21 @@ include('fotoPerfil.php');
                 
                 <?php 
                   include('infoBio.php');
-                  echo "<strong>{$_SESSION['nome']}</strong><br>"; 
-                  echo "<i>{$perfil['usuario']}</i>";
-                  echo "<p>{$perfil['biografia']}</p>";
-                  echo "<p>{$perfil['emailInsitucional']}</p>";
-                  echo "<p>{$perfil['emailComum']}</p>";
+                  if(isset($_SESSION['ID'])){
+                    
+                    echo "<strong>{$_SESSION['nome']}</strong><br>"; 
+                    echo "<i>{$perfil['usuario']}</i>";
+                    echo "<p>{$perfil['biografia']}</p>";
+                    echo "<p>{$perfil['emailInsitucional']}</p>";
+                    echo "<p>{$perfil['emailComum']}</p>";
+                  }
                 ?>
 
             </div>
             <div class="botao">
               <div class="biografiaBtn">
                 <?php 
-                  if(isset($_SESSION['visita'])){
-                      echo "<a href='pglogin.php' class='linkBio'>Logue-se para editar.</a>";
-                    }else{
+                  if(isset($_SESSION['ID'])){
                       echo "<input type=button value='Editar Perfil' class='editarBtn'>";
                     }?>
               </div>

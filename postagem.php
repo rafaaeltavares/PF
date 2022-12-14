@@ -6,14 +6,15 @@ $usuario = $_SESSION['usr'];
 ?>
 <?php
 if(empty($_POST['msg'])){
-    echo "Precisa digitar algo!";
-    header('location:painel.php');
     exit();
 }else{
     $msg = mysqli_real_escape_string($conexao,trim($_POST['msg']));
-    salvarBD($conexao,$msg,$id,$usuario);
-    $_SESSION['existirPost'] == TRUE;
+    $select = mysqli_real_escape_string($conexao,trim($_POST['select']));
+    salvarBD($conexao,$msg,$id,$usuario,$select);
+    // $_SESSION['existirPost'] === TRUE;
     header('location:painel.php');
+    echo $msg;
+    echo $select;
 }
 ?>
 <?php
@@ -30,9 +31,9 @@ function liberarAcesso($conexao,$usuario){
         return $nivel['NivId'];
         }
     }
-function salvarBD($conexao,$msg,$id,$usuario){
+function salvarBD($conexao,$msg,$id,$usuario,$select){
     $nivel = liberarAcesso($conexao,$usuario);
-    $sql = "insert into postagem(mensagem,Usrid,NivId,hora) values('$msg','$id','$nivel', now() )";
+    $sql = "insert into postagem(mensagem,Usrid,NivId,grupo,hora) values('$msg','$id','$nivel',$select, now() )";
     if(isset($_SESSION['ID'])){
         $query = mysqli_query($conexao,$sql);
     }
