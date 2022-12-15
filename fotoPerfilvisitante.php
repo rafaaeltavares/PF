@@ -4,5 +4,3 @@ if(isset($_SESSION['visita'])){
 }else{
     echo "<img src='upload/$fotoPerfil'>";
 }
-
-?>

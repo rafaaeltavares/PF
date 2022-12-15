@@ -17,13 +17,104 @@ $adm ="administrador";
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/4/41/Logotipo_cefet-rj.jpg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <a href="https://storyset.com/work"></a>
     <script async src="https://static.addtoany.com/menu/page.js"></script>
     <script async src="https://static.addtoany.com/menu/page.js"></script>
-   
-    
-
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      
+<style>
+
+#botaoPulbli{
+  display:flex;
+  position:fixed;
+  /* align-content:center; */
+  right:1;
+  bottom:1;
+  margin-left:700px;
+}
+
+.img{
+     width:1000px;
+     margin-top:-200px;
+     position:fixed;
+     margin-left: -100px;
+
+}
+/* .tete{
+  border: 1px solid red;
+  display:flex;
+  
+} */
+#lado{
+    margin-top: -1100px;
+    width: 110px;
+    margin-left: 00px;
+    display:flex;
+
+}
+#botao
+h1 {
+  color: #fff;
+  font-size: 4rem;
+  text-transform: uppercase;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 3rem;
+  }
+}
+
+
+.btn {
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #0e084e;
+  border-radius: 0.6em;
+  color: #0e084e;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  margin: 20px;
+  padding: 2em 10em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+.btn:hover, .btn:focus {
+  color: black;
+  outline: 0;
+}
+
+.third {
+  border-color: #0e084e;
+  color: #fff;
+  box-shadow: 0 0 40px 40px #0e084e inset, 0 0 0 0 ;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+}
+.third:hover {
+  box-shadow:  0 0 10px 4px #0e084e;
+}
+
+
+</style>
+
    </head>
 <body>
   <div class="sidebar close">
@@ -32,7 +123,7 @@ $adm ="administrador";
       <span class="logo_name">SYFET</span>
     </div>
     <ul class="nav-links">
-      <li>
+      <li id='home'>
         <a href="painel.php">
           <i class='bx bx-grid-alt' ></i>
           <span class="link_name">Home</span>
@@ -41,16 +132,17 @@ $adm ="administrador";
           <li><a class="link_name" href="painel.php">Home</a></li>
         </ul>
       </li>
-
+    <?php if(isset($_SESSION['visita'])):?>
       <li id="mapaCampus">
-        <a href="#">
+        <a href="mapas/pgmapas.html">
         <i class='bx bx-map-alt'></i>
           <span class="link_name" >Mapa campus</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Mapa do campus</a></li>
+          <li><a class="link_name" href="mapas/pgmapas.html">Mapa do campus</a></li>
         </ul>
       </li>
+    <?php endif;?>
       <li id="provas">
         <a href="pgbaixar.php" id='mc'>
           <i class='bx bx-notepad' ></i>
@@ -60,7 +152,6 @@ $adm ="administrador";
           <li><a class="link_name" href="pgbaixar.php" id='cm'>Provas anteriores</a></li>
         </ul>
       </li>
-
       <li id="comunidade">
         <a href="pgComunidadeDigital.php">
           <i class='bx bx-compass' ></i>
@@ -106,12 +197,18 @@ $adm ="administrador";
   </div>
   <section class="home-section">
     <div class="home-content"> 
+
+
+
       <i class='bx bx-menu' ></i>
           <div class="nomao">
             <span class="text">Olá <?php echo $_SESSION["nome"];?></span>
           </div>
-    </div>
+          
+        
 
+    </div>
+<img src="imagens/imgA.png" class="img">
    
     <div class='post-pai'>
     
@@ -119,11 +216,15 @@ $adm ="administrador";
         <?php
           $query = "select * from postagem inner join cadusuario on postagem.Usrid = cadusuario.Usrid = 1 order by hora desc;";
           $resultado = mysqli_query($conexao,$query);
+            
             if(mysqli_num_rows($resultado) > 0){
                     
               while($linhas = mysqli_fetch_assoc($resultado)){
+
+                
+
                 if($linhas['NivId'] == 1){
-                  if($linhas['grupo'] == 1){
+                  if($linhas['grupo'] == '1'){
                     echo "<div class='card text-bg-primary mb-3' style='width: 690px;'>
                     <div class='card-header'>{$adm}</div>
                     <div class='card-body'>
@@ -133,7 +234,7 @@ $adm ="administrador";
                   </div>";
                   }
                   
-                  if(isset($_SESSION['visita']) && $linhas['grupo'] == 2){
+                  if(isset($_SESSION['visita']) && $linhas['grupo'] == '2'){
                     echo "<div class='card text-bg-warning mb-3' style='max-width: 690px;'>
                             <div class='card-header'>{$adm}</div>
                             <div class='card-body'>
@@ -142,7 +243,7 @@ $adm ="administrador";
                             </div>
                         </div>";
                   }
-                  if($_SESSION["acesso"] == "aluno" && $linhas['grupo'] == 3 ){
+                  if($_SESSION["acesso"] == "aluno" && $linhas['grupo'] == '3'){
                     echo "<div class='card text-bg-info mb-3' style='max-width: 690px;'>
                             <div class='card-header'>{$adm}</div>
                             <div class='card-body'>
@@ -163,9 +264,27 @@ $adm ="administrador";
       if($_SESSION['acesso'] === $adm):
     ?>
   
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Publicar
-  </button>
+
+<div id="lado" class="container text-center" z-index="999">
+  <div class="row row-cols-5">
+    <div class="col"></div>
+    <div class="col"></div>
+    
+    <div class="col-7">
+    
+      <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn third" id='botaoPulbli'>Publicar</button>
+ 
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
+    
+</div>
+
+  </div>
+</div>
+      
+
 
         
     <?php 
@@ -204,9 +323,12 @@ $adm ="administrador";
                 ?>
               </div>
         </div>
+
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            <button type="SUBMIT" class="btn btn-primary">Publicar</button>
+
+            <button type="submit" class="btn btn-outline-primary" color="#0e084e">Publicar</button>
             </form>
           </div>
         </div>
@@ -222,16 +344,15 @@ $adm ="administrador";
   <script>
     const Acesso = "<?php echo isset($_SESSION['logado']); ?>"
     const pgIdsBloqueados = ['comunidade','mapaCampus'];
-  if(!Acesso){
-      pgIdsBloqueados.forEach(function(ids){
+    if(!Acesso){
+        pgIdsBloqueados.forEach(function(ids){
 
-      let bloqueados = document.getElementById(""+ids);
-      bloqueados.addEventListener('click',function(e){
-        bloqueados.classlist.add('bloqueado');
-
-
+        let bloqueados = document.getElementById(""+ids);
+        bloqueados.addEventListener('click',function(e){
+        e.preventDefault();
+        
+            })
         })
-      })
     }
   </script>
    <script>

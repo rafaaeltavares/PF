@@ -24,7 +24,7 @@
       <span class="logo_name">SYFET</span>
     </div>
     <ul class="nav-links">
-      <li>
+      <li id='home'>
         <a href="painel.php">
           <i class='bx bx-grid-alt' ></i>
           <span class="link_name">Home</span>
@@ -71,7 +71,16 @@
           <li><a class="link_name" href="pgcontato.php">Contactar desenvolvedores</a></li>
         </ul>
       </li>
-    
+
+      <li id='perfil'>
+        <a href="perfil.php" id='mc'>
+        <i class='bx bx-user'></i>
+          <span class="link_name">Perfil</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="perfil.php" id='cm'>Perfil</a></li>
+        </ul>
+      </li>
       <li>
     <div class="profile-details">
       <div class="profile-content">
@@ -138,7 +147,20 @@
 
 
 
+        <script>
+          const Acesso = "<?php echo isset($_SESSION['logado']); ?>"
+          const pgIdsBloqueados = ['comunidade','mapaCampus'];
+          if(!Acesso){
+              pgIdsBloqueados.forEach(function(ids){
 
+              let bloqueados = document.getElementById(""+ids);
+              bloqueados.addEventListener('click',function(e){
+              e.preventDefault();
+              
+                  })
+              })
+          }
+        </script>
 
 
 

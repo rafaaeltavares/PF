@@ -1,0 +1,61 @@
+CREATE DATABASE  IF NOT EXISTS `login` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `login`;
+
+
+
+
+
+DROP TABLE IF EXISTS `cadusuario`;
+
+CREATE TABLE `cadusuario` (
+  `Usrid` int NOT NULL AUTO_INCREMENT,
+  `UsrNome` varchar(45) NOT NULL,
+  `UsrMatricula` varchar(45) NOT NULL,
+  `UsrUsuario` varchar(45) NOT NULL,
+  `UsrSenha` varchar(45) NOT NULL,
+  PRIMARY KEY (`Usrid`),
+  UNIQUE KEY `UsrMatricula_UNIQUE` (`UsrMatricula`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+LOCK TABLES `cadusuario` WRITE;
+
+INSERT INTO `cadusuario` VALUES (1,'123','123','syfet','8899a97dcafbd3755a4ff6123a478168'),(2,'rafa','4','32','97c1089ad6c8a922577637fe8a04f2a4'),(3,'1','1','1','c4ca4238a0b923820dcc509a6f75849b'),(4,'rafael','999','cefet','8899a97dcafbd3755a4ff6123a478168'),(5,'3','3','3','eccbc87e4b5ce2fe28308fd9f2a7baf3'),(6,'5','5','5','5'),(7,'rafael tavares da silva','000','syfeta','123123'),(8,'Rafael tavares da silva','8','8','8'),(9,'Ulisses Roque Tomaz','1239','ulis','123'),(10,'malu','143242','malu','123'),(11,'rafa','6454','syfet123123','123');
+
+UNLOCK TABLES;
+
+DROP TABLE IF EXISTS `cofnivelacesso`;
+
+CREATE TABLE `cofnivelacesso` (
+  `Usrid` int NOT NULL,
+  `NivId` int NOT NULL,
+  KEY `Usrid` (`Usrid`),
+  KEY `NivId` (`NivId`),
+  CONSTRAINT `cofnivelacesso_ibfk_1` FOREIGN KEY (`Usrid`) REFERENCES `cadusuario` (`Usrid`),
+  CONSTRAINT `cofnivelacesso_ibfk_2` FOREIGN KEY (`NivId`) REFERENCES `nivelacesso` (`NivId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `cofnivelacesso` WRITE;
+
+INSERT INTO `cofnivelacesso` VALUES (2,5),(3,5),(4,5),(5,5),(6,5),(7,5),(8,1),(9,5),(10,5),(11,5);
+
+UNLOCK TABLES;
+
+--
+-- Table structure for table `nivelacesso`
+--
+
+DROP TABLE IF EXISTS `nivelacesso`;
+
+CREATE TABLE `nivelacesso` (
+  `NivId` int NOT NULL,
+  `NivDescricao` varchar(45) NOT NULL,
+  PRIMARY KEY (`NivId`,`NivDescricao`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+LOCK TABLES `nivelacesso` WRITE;
+
+INSERT INTO `nivelacesso` VALUES (1,'administrador'),(5,'aluno');
+
+UNLOCK TABLES;

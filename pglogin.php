@@ -1,10 +1,4 @@
-<?php
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    if(!$BD = new PDO("mysql:host=127.0.0.1;bdname=login","root","123123")){
-        die("não conseguimos conexão ao banco de dados");
-    }
-}
-?>
+
 <?php
 session_start();
 ?>

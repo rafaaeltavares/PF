@@ -12,11 +12,12 @@ echo $id;
     $emailInstitucional = mysqli_real_escape_string($conexao,$_POST['emailInstitucional']);
     $emailComum = mysqli_real_escape_string($conexao,$_POST['emailComum']);
     $biografia = mysqli_real_escape_string($conexao,$_POST['biografia']);
-    
     echo $emailComum;
 
     $existe = isset($_FILES['arquivoFoto']);
     $existeCapa = isset($_FILES['arquivoBanner']);
+
+    echo $existe;
 
 
     function alterarPerfil($conexao,$emailInstitucional,$emailComum,$biografia,$usuario,$id){
